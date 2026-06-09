@@ -13,6 +13,10 @@
 fbg.log
 /kingdom.tss
 
+*.bundle
+*.so
+*.dll
+
 /CSharp??Support/compilation.log
 /CSharp??Support/compilation log.txt
 /Assets/WrappedLogic/Plugins/x86_64/WrappedLogic.ilk*
