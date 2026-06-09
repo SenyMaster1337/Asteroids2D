@@ -1,0 +1,42 @@
+{
+  "Asteroid": {
+    "AsteroidDebrisCount": 2,
+    "Mover": {
+      "Speed": 4,
+      "RotationSpeed": 25
+    },
+    "Physics": {
+      "Mass": 1,
+      "KnockbackForce": 2
+    },
+    "Reward": {
+      "RewardToDestructionValue": 100
+    }
+  },
+  "AsteroidDebris": {
+    "Mover": {
+      "Speed": 3,
+      "RotationSpeed": 30
+    },
+    "Physics": {
+      "Mass": 1,
+      "KnockbackForce": 2
+    },
+    "Reward": {
+      "RewardToDestructionValue": 50
+    }
+  },
+  "AlienShip": {
+    "Follower": {
+      "Speed": 8,
+      "Agility": 3
+    },
+    "Physics": {
+      "Mass": 1,
+      "KnockbackForce": 5
+    },
+    "Reward": {
+      "RewardToDestructionValue": 200
+    }
+  }
+}

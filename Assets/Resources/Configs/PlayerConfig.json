@@ -1,0 +1,28 @@
+{
+  "Physics": {
+    "Mass": 1,
+    "KnockbackForce": 2
+  },
+  "Mover": {
+    "ThrustAcceleration": 22,
+    "MaxSpeed": 10,
+    "RotationSpeed": 180
+  },
+  "Health": {
+    "MaxHealth": 3
+  },
+  "Bullet": {
+    "Lifetime": 3,
+    "Speed": 15,
+    "FireRate": 0.2
+  },
+  "Laser": {
+    "Lifetime": 0.15,
+    "MaxCharges": 3,
+    "Cooldown": 5,
+    "FireRate": 0.5
+  },
+  "Invincibility": {
+    "Duration": 3.0
+  }
+}
