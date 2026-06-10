@@ -54,7 +54,7 @@ namespace Code.Infrastructure.Initializers
             AreaConfig areaConfig = _configService.Area;
             _cameraProvider.Camera.GetComponent<CameraZoom>().Init(areaConfig.WorldWidth, areaConfig.WorldHeight);
 
-            _enemyWaveService.Start();
+            _enemyWaveService.StartWave();
         }
     }
 }

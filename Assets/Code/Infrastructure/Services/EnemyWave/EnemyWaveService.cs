@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Code.Core.Interfaces.Spawners;
-using Code.Infrastructure.Services.ConfigLoaders.Enemies;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.StaticData;
 using UnityEngine;
@@ -9,15 +9,23 @@ namespace Code.Infrastructure.Services.EnemyWave
 {
     public class EnemyWaveService : IEnemyWaveService, ITickable, IInitializable
     {
+        private class WaveEntry
+        {
+            public float Interval { get; private set; }
+            public float Timer;
+
+            public WaveEntry(float interval)
+            {
+                Interval = interval;
+                Timer = interval;
+            }
+        }
+
         private readonly IEnemySpawnerService _enemySpawner;
         private readonly IConfigService _configService;
 
-        private float _asteroidSpawnInterval;
-        private float _alienSpawnInterval;
-
-        private float _asteroidTimer;
-        private float _alienTimer;
-
+        private WaveEntry _waveEntry;
+        private Dictionary<EnemyType, WaveEntry> _enemyWaves;
         private bool _isActive;
 
         public EnemyWaveService(IEnemySpawnerService enemySpawner, IConfigService configService)
@@ -28,10 +36,13 @@ namespace Code.Infrastructure.Services.EnemyWave
 
         public void Initialize()
         {
-            EnemySpawnConfig spawnConfig = _configService.EnemySpawn;
+            var spawnConfig = _configService.EnemySpawn;
 
-            _asteroidSpawnInterval = spawnConfig.AsteroidSpawnIntervalValue;
-            _alienSpawnInterval = spawnConfig.AlienShipSpawnIntervalValue;
+            _enemyWaves = new Dictionary<EnemyType, WaveEntry>
+            {
+                [EnemyType.Asteroid] = new(spawnConfig.AsteroidSpawnIntervalValue),
+                [EnemyType.AlienShip] = new(spawnConfig.AlienShipSpawnIntervalValue)
+            };
         }
 
         public void Tick()
@@ -39,33 +50,20 @@ namespace Code.Infrastructure.Services.EnemyWave
             if (_isActive == false)
                 return;
 
-            _asteroidTimer -= Time.deltaTime;
-
-            if (_asteroidTimer <= 0f)
+            foreach (EnemyType enemyType in _enemyWaves.Keys)
             {
-                _enemySpawner.Spawn(EnemyType.Asteroid);
-                _asteroidTimer = _asteroidSpawnInterval;
-            }
+                _waveEntry = _enemyWaves[enemyType];
+                _waveEntry.Timer -= Time.deltaTime;
 
-            _alienTimer -= Time.deltaTime;
-
-            if (_alienTimer <= 0f)
-            {
-                _enemySpawner.Spawn(EnemyType.AlienShip);
-                _alienTimer = _alienSpawnInterval;
+                if (_waveEntry.Timer <= 0f)
+                {
+                    _enemySpawner.Spawn(enemyType);
+                    _waveEntry.Timer = _waveEntry.Interval;
+                }
             }
         }
 
-        public void Start()
-        {
-            _asteroidTimer = _asteroidSpawnInterval;
-            _alienTimer = _alienSpawnInterval;
-            _isActive = true;
-        }
-
-        public void Stop()
-        {
-            _isActive = false;
-        }
+        public void StartWave()
+            => _isActive = true;
     }
 }
