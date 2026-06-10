@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Code.Gameplay.Lasers
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class Laser : MonoBehaviour
     {
         private float _duration;

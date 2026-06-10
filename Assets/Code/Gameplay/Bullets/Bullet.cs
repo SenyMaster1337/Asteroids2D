@@ -1,10 +1,10 @@
 using System;
 using Code.Core.Interfaces.Enemy;
-using Code.Gameplay.Enemies;
 using UnityEngine;
 
 namespace Code.Gameplay.Bullets
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class Bullet : MonoBehaviour
     {
         public event Action<Bullet> Expired;
