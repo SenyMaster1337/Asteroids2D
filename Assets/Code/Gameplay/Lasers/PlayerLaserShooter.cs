@@ -13,9 +13,9 @@ namespace Code.Gameplay.Lasers
         public ReactiveProperty<int> Charges { get; } = new();
         public ReactiveProperty<float> CooldownRemaining { get; } = new();
 
-        private int _maxCharges = 3;
-        private float _cooldownDuration = 5f;
-        private float _fireRate = 0.5f;
+        private int _maxCharges;
+        private float _cooldownDuration;
+        private float _fireRate;
         private float _fireTimer;
 
         private ILaserSpawnerService _laserSpawner;
@@ -27,9 +27,6 @@ namespace Code.Gameplay.Lasers
             _inputService = inputService;
             _laserSpawner = laserSpawner;
         }
-
-        private void Awake() =>
-            Charges.Value = _maxCharges;
 
         private void Update()
         {
@@ -55,6 +52,8 @@ namespace Code.Gameplay.Lasers
             _maxCharges = maxCharges;
             _cooldownDuration = cooldownDuration;
             _fireRate = fireRate;
+
+            Charges.Value = _maxCharges;
         }
 
         private void TickCooldown()
