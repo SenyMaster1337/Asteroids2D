@@ -1,4 +1,4 @@
-using Code.Infrastructure.Factory.UI;
+using Code.Infrastructure.Factories.UIFactories;
 using Code.Infrastructure.Initializers;
 using Code.Infrastructure.Services.LoadGameLevel;
 using Code.UI.Binders;

@@ -4,7 +4,7 @@ using Code.Core.Interfaces.Enemy;
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Area;
 using Code.Gameplay.Enemies;
-using Code.Infrastructure.Factory.Game;
+using Code.Infrastructure.Factories.EnemyFactories;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.ObjectPools;
 using Code.StaticData;
@@ -23,7 +23,7 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
 
         public event Action<IEnemy> EnemyDied;
 
-        private readonly IGameFactory _gameFactory;
+        private readonly IEnemyFactory _enemyFactory;
         private readonly IGameAreaProvider _gameAreaProvider;
         private readonly IConfigService _configService;
         private readonly Dictionary<EnemyType, ObjectPool<IEnemy>> _pools = new();
@@ -31,10 +31,10 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
         private GameArea _area;
         private int _activeCount;
 
-        public EnemySpawnerService(IGameFactory gameFactory, IGameAreaProvider gameAreaProvider,
+        public EnemySpawnerService(IEnemyFactory enemyFactory, IGameAreaProvider gameAreaProvider,
             IConfigService configService)
         {
-            _gameFactory = gameFactory;
+            _enemyFactory = enemyFactory;
             _gameAreaProvider = gameAreaProvider;
             _configService = configService;
         }
@@ -98,7 +98,7 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
 
         private IEnemy CreateEnemy(EnemyType type)
         {
-            IEnemy enemy = _gameFactory.CreateEnemy(type).GetComponent<IEnemy>();
+            IEnemy enemy = _enemyFactory.CreateEnemy(type).GetComponent<IEnemy>();
             enemy.GameObject.SetActive(false);
             return enemy;
         }

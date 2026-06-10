@@ -1,5 +1,5 @@
 using Code.Gameplay.PlayerProviders;
-using Code.Infrastructure.Factory.UI;
+using Code.Infrastructure.Factories.UIFactories;
 using Zenject;
 
 namespace Code.Infrastructure.Services.LoseServices

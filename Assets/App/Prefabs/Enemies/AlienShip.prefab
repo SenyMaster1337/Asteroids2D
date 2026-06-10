@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2743583392930825673}
   - component: {fileID: 1433737780710540447}
   - component: {fileID: 8013904072081127593}
+  - component: {fileID: 1447758331871799644}
   m_Layer: 7
   m_Name: AlienShip
   m_TagString: Untagged
@@ -165,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46ce5dc7371477cbb1f6bd13bf59c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetime: 25
 --- !u!114 &6724054694472656862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,10 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12294d47f227c746a422201542cf40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpeed: 3
-  _maxSpeed: 3
-  _chaseRange: 10
-  _agility: 3
 --- !u!114 &2743583392930825673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e961e38df845ed86bb04018c0ac906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &1433737780710540447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64afb9fd15849a09e6e8c6778727e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackForce: 1.25
 --- !u!114 &8013904072081127593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetLayer: 6
+--- !u!114 &1447758331871799644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7101275302871880074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9f80d9c52854145ac206d7b5732d384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

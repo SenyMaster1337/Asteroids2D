@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Infrastructure.Factory.ProjectileFactory
+namespace Code.Infrastructure.Factories.ProjectileFactories
 {
     public interface IProjectileFactory
     {

@@ -1,6 +1,6 @@
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Lasers;
-using Code.Infrastructure.Factory.ProjectileFactory;
+using Code.Infrastructure.Factories.ProjectileFactories;
 using UnityEngine;
 using Zenject;
 

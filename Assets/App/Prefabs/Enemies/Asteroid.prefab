@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1900288713637171799}
   - component: {fileID: -1814466024403256126}
   - component: {fileID: 7163764317468018815}
+  - component: {fileID: 2894531653351506107}
   m_Layer: 7
   m_Name: Asteroid
   m_TagString: Untagged
@@ -165,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558effe04d654afd908d653cedf8c61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetime: 25
 --- !u!114 &981221575223803495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b852a9602a3094a87d3d4bb6b0e8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpeed: 1
-  _maxSpeed: 2
-  _rotationSpeed: 25
 --- !u!114 &1900288713637171799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e961e38df845ed86bb04018c0ac906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &-1814466024403256126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64afb9fd15849a09e6e8c6778727e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockbackForce: 1.25
 --- !u!114 &7163764317468018815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetLayer: 6
+--- !u!114 &2894531653351506107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155725152667385939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76deb17ce024132ad21809d7d9acf7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,9 +1,11 @@
 using Code.Core.CameraProviders;
 using Code.Gameplay.Area;
 using Code.Gameplay.PlayerProviders;
-using Code.Infrastructure.Factory.Game;
-using Code.Infrastructure.Factory.ProjectileFactory;
-using Code.Infrastructure.Factory.UI;
+using Code.Infrastructure.Factories.AreaFactories;
+using Code.Infrastructure.Factories.EnemyFactories;
+using Code.Infrastructure.Factories.PlayerFactories;
+using Code.Infrastructure.Factories.ProjectileFactories;
+using Code.Infrastructure.Factories.UIFactories;
 using Code.Infrastructure.Initializers;
 using Code.Infrastructure.Services.EnemyWave;
 using Code.Infrastructure.Services.LevelReset;
@@ -36,7 +38,9 @@ namespace Code.Infrastructure.Installers
         private void BindFactories()
         {
             Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
-            Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
+            Container.Bind<IGameAreaFactory>().To<GameAreaFactory>().AsSingle();
+            Container.Bind<IPlayerFactory>().To<PlayerFactory>().AsSingle();
+            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
             Container.Bind<IProjectileFactory>().To<ProjectileFactory>().AsSingle();
         }
 

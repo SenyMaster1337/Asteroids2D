@@ -6,7 +6,7 @@ using Code.Infrastructure.Services.ConfigServices;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.Factory.ProjectileFactory
+namespace Code.Infrastructure.Factories.ProjectileFactories
 {
     public class ProjectileFactory : IProjectileFactory
     {

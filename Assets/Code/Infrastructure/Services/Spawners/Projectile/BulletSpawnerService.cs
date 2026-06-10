@@ -1,6 +1,6 @@
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Bullets;
-using Code.Infrastructure.Factory.ProjectileFactory;
+using Code.Infrastructure.Factories.ProjectileFactories;
 using Code.Infrastructure.Services.ObjectPools;
 using UnityEngine;
 using Zenject;

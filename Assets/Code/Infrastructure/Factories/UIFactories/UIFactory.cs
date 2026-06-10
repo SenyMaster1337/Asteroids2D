@@ -5,7 +5,7 @@ using Code.UI.Views;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.Factory.UI
+namespace Code.Infrastructure.Factories.UIFactories
 {
     public class UIFactory : IUIFactory
     {

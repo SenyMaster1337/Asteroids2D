@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Infrastructure.Factory.UI
+namespace Code.Infrastructure.Factories.UIFactories
 {
     public interface IUIFactory
     {

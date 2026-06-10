@@ -1,7 +1,8 @@
 using Code.Core.CameraProviders;
 using Code.Gameplay;
-using Code.Infrastructure.Factory.Game;
-using Code.Infrastructure.Factory.UI;
+using Code.Infrastructure.Factories.AreaFactories;
+using Code.Infrastructure.Factories.PlayerFactories;
+using Code.Infrastructure.Factories.UIFactories;
 using Code.Infrastructure.Services.ConfigLoaders.Area;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.EnemyWave;
@@ -14,19 +15,21 @@ namespace Code.Infrastructure.Initializers
     public class GameLevelInitializer : IInitializable
     {
         private readonly IEnemyWaveService _enemyWaveService;
-        private readonly IGameFactory _gameFactory;
+        private readonly IPlayerFactory _playerFactory;
+        private readonly IGameAreaFactory _gameAreaFactory;
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerTeleportService _playerTeleportService;
         private readonly ILoseService _loseService;
         private readonly ICameraProvider _cameraProvider;
         private readonly IConfigService _configService;
 
-        public GameLevelInitializer(IEnemyWaveService enemyWaveService, IGameFactory gameFactory, IUIFactory uiFactory,
-            IPlayerTeleportService playerTeleportService, ILoseService loseService, ICameraProvider cameraProvider,
-            IConfigService configService)
+        public GameLevelInitializer(IEnemyWaveService enemyWaveService, IPlayerFactory playerFactory,
+            IGameAreaFactory gameAreaFactory, IUIFactory uiFactory, IPlayerTeleportService playerTeleportService,
+            ILoseService loseService, ICameraProvider cameraProvider, IConfigService configService)
         {
             _enemyWaveService = enemyWaveService;
-            _gameFactory = gameFactory;
+            _playerFactory = playerFactory;
+            _gameAreaFactory = gameAreaFactory;
             _uiFactory = uiFactory;
             _playerTeleportService = playerTeleportService;
             _loseService = loseService;
@@ -36,8 +39,8 @@ namespace Code.Infrastructure.Initializers
 
         public void Initialize()
         {
-            _gameFactory.CreateGameArea();
-            _gameFactory.CreatePlayer();
+            _gameAreaFactory.CreateGameArea();
+            _playerFactory.CreatePlayer();
             _uiFactory.CreateUIRoot();
             _uiFactory.CreateHud();
             _uiFactory.CreatePlayerHealthView();
