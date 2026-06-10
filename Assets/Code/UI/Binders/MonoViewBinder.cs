@@ -13,35 +13,31 @@ namespace Code.UI.Binders
         {
             FromInstance = 0,
             FromResolve = 1,
-            FromResolveId = 2
         }
 
         public BindingMode ViewBinding;
         public Object View;
         public MonoScript ViewType;
-        public string ViewId;
 
-        [Space(8)]
+        [Space(8)] 
         public BindingMode ViewModelBinding;
         public Object ViewModel;
         public MonoScript ViewModelType;
-        public string ViewModelId;
 
         private DiContainer _diContainer;
-
-        [Inject]
-        private void Construct(DiContainer diContainer) 
-            => _diContainer = diContainer;
-
         private IBinder _binder;
 
-        private void Awake() 
+        [Inject]
+        private void Construct(DiContainer diContainer)
+            => _diContainer = diContainer;
+
+        private void Awake()
             => _binder = CreateBinder();
-        
-        private void OnEnable() 
+
+        private void OnEnable()
             => _binder.Bind();
-        
-        private void OnDisable() 
+
+        private void OnDisable()
             => _binder.Unbind();
 
         private IBinder CreateBinder()
@@ -50,7 +46,6 @@ namespace Code.UI.Binders
             {
                 BindingMode.FromInstance => this.View,
                 BindingMode.FromResolve => _diContainer.Resolve(ViewType.GetClass()),
-                BindingMode.FromResolveId => _diContainer.ResolveId(ViewType.GetClass(), ViewId),
                 _ => throw new Exception($"Binding type of View {ViewBinding} is not found!")
             };
 
@@ -58,7 +53,6 @@ namespace Code.UI.Binders
             {
                 BindingMode.FromInstance => ViewModel,
                 BindingMode.FromResolve => _diContainer.Resolve(ViewModelType.GetClass()),
-                BindingMode.FromResolveId => _diContainer.ResolveId(ViewModelType.GetClass(), ViewModelId),
                 _ => throw new Exception($"Binding type of View {ViewModelBinding} is not found!")
             };
 

@@ -13,35 +13,37 @@ namespace Code.Editor
 
             EditorGUI.BeginChangeCheck();
 
-            binder.ViewBinding =
-                (MonoViewBinder.BindingMode)EditorGUILayout.EnumPopup("View Binding", binder.ViewBinding);
+            binder.ViewBinding = (MonoViewBinder.BindingMode)EditorGUILayout.EnumPopup(
+                "View Binding", binder.ViewBinding);
 
             if (binder.ViewBinding == MonoViewBinder.BindingMode.FromInstance)
-                binder.View = EditorGUILayout.ObjectField("View", binder.View, typeof(Object), true);
+            {
+                binder.View = EditorGUILayout.ObjectField(
+                    "View", binder.View, typeof(Object), true);
+            }
 
-            if (binder.ViewBinding == MonoViewBinder.BindingMode.FromResolve ||
-                binder.ViewBinding == MonoViewBinder.BindingMode.FromResolveId)
-                binder.ViewType =
-                    (MonoScript)EditorGUILayout.ObjectField("View Type", binder.ViewType, typeof(MonoScript), false);
-
-            if (binder.ViewBinding == MonoViewBinder.BindingMode.FromResolveId)
-                binder.ViewId = EditorGUILayout.TextField("View Id", binder.ViewId);
+            if (binder.ViewBinding == MonoViewBinder.BindingMode.FromResolve)
+            {
+                binder.ViewType = (MonoScript)EditorGUILayout.ObjectField(
+                    "View Type", binder.ViewType, typeof(MonoScript), false);
+            }
 
             EditorGUILayout.Space(8);
 
-            binder.ViewModelBinding =
-                (MonoViewBinder.BindingMode)EditorGUILayout.EnumPopup("View Model Binding", binder.ViewModelBinding);
+            binder.ViewModelBinding = (MonoViewBinder.BindingMode)EditorGUILayout.EnumPopup(
+                "View Model Binding", binder.ViewModelBinding);
 
             if (binder.ViewModelBinding == MonoViewBinder.BindingMode.FromInstance)
-                binder.ViewModel = EditorGUILayout.ObjectField("View Model", binder.ViewModel, typeof(Object), true);
+            {
+                binder.ViewModel = EditorGUILayout.ObjectField(
+                    "View Model", binder.ViewModel, typeof(Object), true);
+            }
 
-            if (binder.ViewModelBinding == MonoViewBinder.BindingMode.FromResolve ||
-                binder.ViewModelBinding == MonoViewBinder.BindingMode.FromResolveId)
-                binder.ViewModelType = (MonoScript)EditorGUILayout.ObjectField("View Model Type", binder.ViewModelType,
-                    typeof(MonoScript), false);
-
-            if (binder.ViewModelBinding == MonoViewBinder.BindingMode.FromResolveId)
-                binder.ViewModelId = EditorGUILayout.TextField("View Model Id", binder.ViewModelId);
+            if (binder.ViewModelBinding == MonoViewBinder.BindingMode.FromResolve)
+            {
+                binder.ViewModelType = (MonoScript)EditorGUILayout.ObjectField(
+                    "View Model Type", binder.ViewModelType, typeof(MonoScript), false);
+            }
 
             if (EditorGUI.EndChangeCheck())
                 EditorUtility.SetDirty(binder);
