@@ -1,3 +1,4 @@
+using Code.Core.Interfaces.Enemy;
 using Code.Gameplay.Enemies;
 using UnityEngine;
 

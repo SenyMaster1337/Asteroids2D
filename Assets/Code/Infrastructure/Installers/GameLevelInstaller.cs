@@ -5,7 +5,6 @@ using Code.Infrastructure.Factory.Game;
 using Code.Infrastructure.Factory.ProjectileFactory;
 using Code.Infrastructure.Factory.UI;
 using Code.Infrastructure.Initializers;
-using Code.Infrastructure.Services;
 using Code.Infrastructure.Services.EnemyWave;
 using Code.Infrastructure.Services.LevelReset;
 using Code.Infrastructure.Services.LoadGameLevel;
@@ -19,6 +18,7 @@ using Code.UI.Binders;
 using Code.UI.ViewModels;
 using MVVM;
 using Zenject;
+using EnemyDeathHandler = Code.Infrastructure.Services.EnemyDeathHandlers.EnemyDeathHandler;
 
 namespace Code.Infrastructure.Installers
 {
@@ -38,6 +38,7 @@ namespace Code.Infrastructure.Installers
             Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             Container.Bind<IProjectileFactory>().To<ProjectileFactory>().AsSingle();
+            Container.Bind<IProjectileFactory>().To<ProjectileFactory>().AsSingle();
         }
 
         private void BindServices()
@@ -55,6 +56,7 @@ namespace Code.Infrastructure.Installers
             Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<ScoreService>().AsSingle();
             Container.BindInterfacesAndSelfTo<RewardService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EnemyDeathHandler>().AsSingle();
         }
 
         private void BindInitializers()
@@ -79,7 +81,7 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<HealthViewModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<RestartViewModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<ScoreViewModel>().AsSingle();
-            
+
 #if UNITY_ANDROID || UNITY_IOS
             Container.BindInterfacesAndSelfTo<DefaultAttackViewModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<LaserAttackViewModel>().AsSingle();

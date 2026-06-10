@@ -1,4 +1,5 @@
 using System;
+using Code.Core.Interfaces.Enemy;
 using Code.Gameplay.Physics;
 using Code.StaticData;
 using UnityEngine;

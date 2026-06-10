@@ -1,4 +1,5 @@
 using Code.Core.ConfigLoaders;
+using Code.Core.Interfaces.Enemy;
 using Code.Gameplay.Area;
 using Code.Gameplay.Enemies;
 using Code.Gameplay.Enemies.AlienShips;

@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
+using Code.Core.Interfaces.Enemy;
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Area;
 using Code.Gameplay.Enemies;
 using Code.Infrastructure.Factory.Game;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.ObjectPools;
-using Code.Infrastructure.Services.Reward;
 using Code.StaticData;
 using UnityEngine;
 using Zenject;
@@ -20,22 +21,22 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
         private const int AlienPoolSize = 3;
         private const float SpawnOffset = 2f;
 
+        public event Action<IEnemy> EnemyDied;
+
         private readonly IGameFactory _gameFactory;
         private readonly IGameAreaProvider _gameAreaProvider;
         private readonly IConfigService _configService;
-        private readonly IRewardService _rewardService;
         private readonly Dictionary<EnemyType, ObjectPool<IEnemy>> _pools = new();
 
         private GameArea _area;
         private int _activeCount;
 
         public EnemySpawnerService(IGameFactory gameFactory, IGameAreaProvider gameAreaProvider,
-            IConfigService configService, IRewardService rewardService)
+            IConfigService configService)
         {
             _gameFactory = gameFactory;
             _gameAreaProvider = gameAreaProvider;
             _configService = configService;
-            _rewardService = rewardService;
         }
 
         public void Initialize()
@@ -67,13 +68,13 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
 
         private void OnEnemyDeath(IEnemy enemy)
         {
-            _rewardService.GiveReward(enemy.Type);
+            EnemyDied?.Invoke(enemy);
             OnEnemyReturnToPool(enemy);
         }
 
         private void OnEnemyReturnToPool(IEnemy enemy)
         {
-            enemy.Dead -= OnEnemyReturnToPool;
+            enemy.Dead -= OnEnemyDeath;
             enemy.Expired -= OnEnemyReturnToPool;
             enemy.ResetVelocity();
             enemy.GameObject.SetActive(false);

@@ -2,7 +2,7 @@ using System;
 using Code.StaticData;
 using UnityEngine;
 
-namespace Code.Gameplay.Enemies
+namespace Code.Core.Interfaces.Enemy
 {
     public interface IEnemy
     {
