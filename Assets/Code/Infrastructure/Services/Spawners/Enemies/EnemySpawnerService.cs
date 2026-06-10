@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Code.Core.Interfaces.Enemy;
+using Code.Core.BaseEnemies;
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Area;
-using Code.Gameplay.Enemies;
 using Code.Infrastructure.Factories.EnemyFactories;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.ObjectPools;
@@ -21,13 +20,13 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
         private const int AlienPoolSize = 3;
         private const float SpawnOffset = 2f;
 
-        public event Action<IEnemy> EnemyDied;
+        public event Action<BaseEnemy> EnemyDied;
 
         private readonly IEnemyFactory _enemyFactory;
         private readonly IGameAreaProvider _gameAreaProvider;
         private readonly IConfigService _configService;
-        private readonly Dictionary<EnemyType, ObjectPool<IEnemy>> _pools = new();
-        private readonly HashSet<IEnemy> _notActiveEnemies = new();
+        private readonly Dictionary<EnemyType, ObjectPool<BaseEnemy>> _pools = new();
+        private readonly HashSet<BaseEnemy> _notActiveEnemies = new();
 
         private GameArea _area;
         private int _activeCount;
@@ -42,11 +41,11 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
 
         public void Initialize()
         {
-            _pools[EnemyType.Asteroid] = new ObjectPool<IEnemy>(()
+            _pools[EnemyType.Asteroid] = new ObjectPool<BaseEnemy>(()
                 => CreateEnemy(EnemyType.Asteroid), AsteroidPoolSize);
-            _pools[EnemyType.AsteroidDebris] = new ObjectPool<IEnemy>(()
+            _pools[EnemyType.AsteroidDebris] = new ObjectPool<BaseEnemy>(()
                 => CreateEnemy(EnemyType.AsteroidDebris), DebrisPoolSize);
-            _pools[EnemyType.AlienShip] = new ObjectPool<IEnemy>(()
+            _pools[EnemyType.AlienShip] = new ObjectPool<BaseEnemy>(()
                 => CreateEnemy(EnemyType.AlienShip), AlienPoolSize);
 
             foreach (var pool in _pools.Values)
@@ -58,16 +57,16 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             if (_activeCount >= _configService.Area.MaxEnemies)
                 return;
 
-            IEnemy enemy = _pools[type].Get();
-            enemy.GameObject.SetActive(true);
-            enemy.GameObject.transform.position = position ?? GetRandomEdgePosition();
+            BaseEnemy enemy = _pools[type].Get();
+            enemy.gameObject.SetActive(true);
+            enemy.gameObject.transform.position = position ?? GetRandomEdgePosition();
             enemy.Launch();
             enemy.Dead += OnEnemyDeath;
             enemy.Expired += OnEnemyExpired;
             _activeCount++;
         }
 
-        private void OnEnemyDeath(IEnemy enemy)
+        private void OnEnemyDeath(BaseEnemy enemy)
         {
             if (IsEnemyInactive(enemy))
                 return;
@@ -76,7 +75,7 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             ReturnToPool(enemy);
         }
 
-        private void OnEnemyExpired(IEnemy enemy)
+        private void OnEnemyExpired(BaseEnemy enemy)
         {
             if (IsEnemyInactive(enemy))
                 return;
@@ -84,16 +83,16 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             ReturnToPool(enemy);
         }
 
-        private bool IsEnemyInactive(IEnemy enemy) 
+        private bool IsEnemyInactive(BaseEnemy enemy)
             => _notActiveEnemies.Add(enemy) == false;
 
-        private void ReturnToPool(IEnemy enemy)
+        private void ReturnToPool(BaseEnemy enemy)
         {
             _notActiveEnemies.Remove(enemy);
             enemy.Dead -= OnEnemyDeath;
             enemy.Expired -= OnEnemyExpired;
             enemy.ResetVelocity();
-            enemy.GameObject.SetActive(false);
+            enemy.gameObject.SetActive(false);
             _pools[enemy.Type].Return(enemy);
             _activeCount--;
         }
@@ -112,10 +111,10 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             };
         }
 
-        private IEnemy CreateEnemy(EnemyType type)
+        private BaseEnemy CreateEnemy(EnemyType type)
         {
-            IEnemy enemy = _enemyFactory.CreateEnemy(type).GetComponent<IEnemy>();
-            enemy.GameObject.SetActive(false);
+            BaseEnemy enemy = _enemyFactory.CreateEnemy(type).GetComponent<BaseEnemy>();
+            enemy.gameObject.SetActive(false);
             return enemy;
         }
     }

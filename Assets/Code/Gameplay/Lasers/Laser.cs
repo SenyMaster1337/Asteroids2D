@@ -1,5 +1,5 @@
 using System;
-using Code.Core.Interfaces.Enemy;
+using Code.Core.BaseEnemies;
 using Code.Gameplay.Enemies;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace Code.Gameplay.Lasers
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<IEnemy>(out var enemy))
+            if (other.TryGetComponent<BaseEnemy>(out var enemy))
                 enemy.Die();
         }
 

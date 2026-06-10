@@ -1,5 +1,5 @@
 using System;
-using Code.Core.Interfaces.Enemy;
+using Code.Core.BaseEnemies;
 using Code.Core.Interfaces.Spawners;
 using Code.Infrastructure.Services.Reward;
 using Zenject;
@@ -23,7 +23,7 @@ namespace Code.Infrastructure.Services.EnemyDeathHandlers
         public void Dispose()
             => _enemySpawner.EnemyDied -= OnEnemyDied;
 
-        private void OnEnemyDied(IEnemy enemy)
+        private void OnEnemyDied(BaseEnemy enemy)
             => _rewardService.GiveReward(enemy.Type);
     }
 }

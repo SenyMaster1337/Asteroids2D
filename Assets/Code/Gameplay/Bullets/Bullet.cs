@@ -1,5 +1,5 @@
 using System;
-using Code.Core.Interfaces.Enemy;
+using Code.Core.BaseEnemies;
 using UnityEngine;
 
 namespace Code.Gameplay.Bullets
@@ -35,7 +35,7 @@ namespace Code.Gameplay.Bullets
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<IEnemy>(out var enemy))
+            if (other.TryGetComponent<BaseEnemy>(out var enemy))
             {
                 enemy.Die();
                 Expired?.Invoke(this);

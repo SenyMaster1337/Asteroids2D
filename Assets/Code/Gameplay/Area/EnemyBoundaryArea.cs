@@ -1,5 +1,4 @@
-using Code.Core.Interfaces.Enemy;
-using Code.Gameplay.Enemies;
+using Code.Core.BaseEnemies;
 using UnityEngine;
 
 namespace Code.Gameplay.Area
@@ -10,13 +9,13 @@ namespace Code.Gameplay.Area
         private BoxCollider2D _collider;
         private float _width;
         private float _height;
-        
+
         private void Awake()
         {
             _collider = GetComponent<BoxCollider2D>();
             _collider.isTrigger = true;
         }
-        
+
         public void Init(float width, float height)
         {
             _width = width;
@@ -24,11 +23,11 @@ namespace Code.Gameplay.Area
 
             _collider.size = new Vector2(_width, _height);
         }
-        
+
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.TryGetComponent<IEnemy>(out var enemy))
-                enemy.ReturnToPool();
+            if (other.TryGetComponent<BaseEnemy>(out var enemy))
+                enemy.InvokeExpired();
         }
     }
 }

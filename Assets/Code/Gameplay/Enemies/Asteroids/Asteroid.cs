@@ -1,5 +1,4 @@
-using System;
-using Code.Core.Interfaces.Enemy;
+using Code.Core.BaseEnemies;
 using Code.Core.Interfaces.Spawners;
 using Code.StaticData;
 using UnityEngine;
@@ -8,18 +7,11 @@ using Random = UnityEngine.Random;
 
 namespace Code.Gameplay.Enemies.Asteroids
 {
-    public class Asteroid : MonoBehaviour, IEnemy
+    public class Asteroid : BaseEnemy
     {
         private const float SpreadRadius = 1.25f;
 
-        public GameObject GameObject { get; private set; }
-        public EnemyType Type { get; private set; }
-
-        public event Action<IEnemy> Dead;
-        public event Action<IEnemy> Expired;
-
         private int _asteroidDebrisCount;
-
         private IEnemySpawnerService _enemySpawnerService;
         private AsteroidMover _asteroidMover;
 
@@ -27,33 +19,27 @@ namespace Code.Gameplay.Enemies.Asteroids
         private void Construct(IEnemySpawnerService enemySpawnerService)
             => _enemySpawnerService = enemySpawnerService;
 
-        private void Awake()
+        protected override void OnAwake()
         {
-            GameObject = gameObject;
+            base.OnAwake();
             _asteroidMover = GetComponent<AsteroidMover>();
         }
-
-        public void SetType(EnemyType type)
-            => Type = type;
 
         public void Init(int asteroidDebrisCountAfterDestroy)
             => _asteroidDebrisCount = asteroidDebrisCountAfterDestroy;
 
-        public void Launch()
+        public override void Launch()
             => _asteroidMover.Launch(true);
 
-        public void ReturnToPool()
-            => Expired?.Invoke(this);
-
-        public void Die()
+        public override void Die()
         {
             for (int i = 0; i < _asteroidDebrisCount; i++)
                 SpawnDebrisAtRandomAngle();
-
-            Dead?.Invoke(this);
+            
+            base.Die();
         }
 
-        public void ResetVelocity()
+        public override void ResetVelocity()
             => _asteroidMover.ResetVelocity();
 
         private void SpawnDebrisAtRandomAngle()
