@@ -27,6 +27,7 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
         private readonly IGameAreaProvider _gameAreaProvider;
         private readonly IConfigService _configService;
         private readonly Dictionary<EnemyType, ObjectPool<IEnemy>> _pools = new();
+        private readonly HashSet<IEnemy> _notActiveEnemies = new();
 
         private GameArea _area;
         private int _activeCount;
@@ -62,20 +63,35 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             enemy.GameObject.transform.position = position ?? GetRandomEdgePosition();
             enemy.Launch();
             enemy.Dead += OnEnemyDeath;
-            enemy.Expired += OnEnemyReturnToPool;
+            enemy.Expired += OnEnemyExpired;
             _activeCount++;
         }
 
         private void OnEnemyDeath(IEnemy enemy)
         {
+            if (IsEnemyInactive(enemy))
+                return;
+
             EnemyDied?.Invoke(enemy);
-            OnEnemyReturnToPool(enemy);
+            ReturnToPool(enemy);
         }
 
-        private void OnEnemyReturnToPool(IEnemy enemy)
+        private void OnEnemyExpired(IEnemy enemy)
         {
+            if (IsEnemyInactive(enemy))
+                return;
+
+            ReturnToPool(enemy);
+        }
+
+        private bool IsEnemyInactive(IEnemy enemy) 
+            => _notActiveEnemies.Add(enemy) == false;
+
+        private void ReturnToPool(IEnemy enemy)
+        {
+            _notActiveEnemies.Remove(enemy);
             enemy.Dead -= OnEnemyDeath;
-            enemy.Expired -= OnEnemyReturnToPool;
+            enemy.Expired -= OnEnemyExpired;
             enemy.ResetVelocity();
             enemy.GameObject.SetActive(false);
             _pools[enemy.Type].Return(enemy);
