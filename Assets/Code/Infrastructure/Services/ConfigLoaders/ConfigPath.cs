@@ -6,7 +6,5 @@ namespace Code.Infrastructure.Services.ConfigLoaders
         public const string Enemies = "Configs/EnemiesConfig";
         public const string Area = "Configs/AreaConfig";
         public const string EnemySpawn = "Configs/EnemySpawnConfig";
-        public const string GoogleAds = "Configs/GoogleAdsConfig";
-        public const string Rewards = "Configs/RewardConfig";
     }
 }
