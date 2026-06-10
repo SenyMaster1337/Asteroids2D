@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Code.Core.Interfaces.Input;
 using Code.Gameplay.Effects;
@@ -10,6 +11,8 @@ namespace Code.Gameplay.Players
 {
     public class PlayerHitHandler : MonoBehaviour
     {
+        private const float DelayBeforeDamage = 0.2f;
+        
         private float _invincibilityDuration;
         private bool _isHitProcessing;
 
@@ -18,9 +21,10 @@ namespace Code.Gameplay.Players
         private InvulnerabilityEffect _invulnerabilityEffect;
         private IInputLocker _inputLocker;
         private KnockbackToCollision _knockbackToCollision;
+        private CancellationTokenSource _hitCts;
 
         [Inject]
-        public void Construct(IInputLocker inputLocker) 
+        public void Construct(IInputLocker inputLocker)
             => _inputLocker = inputLocker;
 
         private void Awake()
@@ -31,41 +35,63 @@ namespace Code.Gameplay.Players
             _invulnerabilityEffect = GetComponentInChildren<InvulnerabilityEffect>();
         }
 
-        private void OnEnable()
+        private void Start()
             => _knockbackToCollision.Knocked += OnKnocked;
 
-        private void OnDisable()
-            => _knockbackToCollision.Knocked -= OnKnocked;
+        private void OnDestroy()
+        {
+            _knockbackToCollision.Knocked -= OnKnocked;
+            CancelHit();
+        }
 
-        public void Init(float invincibilityDuration) 
+        public void Init(float invincibilityDuration)
             => _invincibilityDuration = invincibilityDuration;
 
-        private void OnKnocked()
+        private void CancelHit()
+        {
+            _hitCts?.Cancel();
+            _hitCts?.Dispose();
+            _hitCts = null;
+        }
+
+        private async void OnKnocked()
         {
             if (_isHitProcessing)
                 return;
 
-            OnHitAsync(destroyCancellationToken).Forget();
+            _isHitProcessing = true;
+            CancelHit();
+            _hitCts = new CancellationTokenSource();
+
+            await OnHitAsync(_hitCts.Token);
         }
 
-        private async UniTaskVoid OnHitAsync(CancellationToken token)
+        private async UniTask OnHitAsync(CancellationToken token)
         {
-            _isHitProcessing = true;
+            try
+            {
+                await UniTask.WaitForSeconds(DelayBeforeDamage, cancellationToken: token);
 
-            await UniTask.WaitForSeconds(0.2f, cancellationToken: token);
+                _player.Health.TakeDamage();
+                _inputLocker.Lock();
+                _playerCollisionDetection.DisableDetection();
+                _invulnerabilityEffect.Play();
 
-            _player.Health.TakeDamage();
-            _inputLocker.Lock();
-            _playerCollisionDetection.DisableDetection();
-            _invulnerabilityEffect.Play();
-
-            await UniTask.WaitForSeconds(_invincibilityDuration, cancellationToken: token);
-
-            _inputLocker.Unlock();
-            _playerCollisionDetection.EnableDetection();
-            _invulnerabilityEffect.Stop();
-
-            _isHitProcessing = false;
+                await UniTask.WaitForSeconds(_invincibilityDuration, cancellationToken: token);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            finally
+            {
+                if (this != null)
+                {
+                    _inputLocker.Unlock();
+                    _playerCollisionDetection.EnableDetection();
+                    _invulnerabilityEffect.Stop();
+                    _isHitProcessing = false;
+                }
+            }
         }
     }
 }

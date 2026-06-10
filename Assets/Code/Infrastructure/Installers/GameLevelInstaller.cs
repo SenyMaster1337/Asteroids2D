@@ -38,7 +38,6 @@ namespace Code.Infrastructure.Installers
             Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
             Container.Bind<IProjectileFactory>().To<ProjectileFactory>().AsSingle();
-            Container.Bind<IProjectileFactory>().To<ProjectileFactory>().AsSingle();
         }
 
         private void BindServices()
