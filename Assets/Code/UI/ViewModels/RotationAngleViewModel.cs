@@ -1,4 +1,3 @@
-using System;
 using Code.Gameplay.PlayerProviders;
 using MVVM;
 using R3;
@@ -12,7 +11,6 @@ namespace Code.UI.ViewModels
         public readonly ReactiveProperty<string> Rotation = new();
 
         private readonly IPlayerProvider _playerProvider;
-        private IDisposable _updateStream;
 
         public RotationAngleViewModel(IPlayerProvider playerProvider)
         {

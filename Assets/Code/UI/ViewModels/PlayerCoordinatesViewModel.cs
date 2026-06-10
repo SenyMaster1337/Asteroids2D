@@ -1,4 +1,3 @@
-using System;
 using Code.Gameplay.PlayerProviders;
 using MVVM;
 using R3;
@@ -12,7 +11,6 @@ namespace Code.UI.ViewModels
         public readonly ReactiveProperty<string> Coordinates = new();
 
         private readonly IPlayerProvider _playerProvider;
-        private IDisposable _updateStream;
 
         public PlayerCoordinatesViewModel(IPlayerProvider playerProvider)
         {
@@ -21,7 +19,7 @@ namespace Code.UI.ViewModels
 
         public void Tick()
         {
-            if (_playerProvider.Player == null) 
+            if (_playerProvider.Player == null)
                 return;
 
             var pos = _playerProvider.Player.transform.position;

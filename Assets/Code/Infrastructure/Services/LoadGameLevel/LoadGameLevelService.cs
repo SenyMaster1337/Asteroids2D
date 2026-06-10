@@ -10,7 +10,6 @@ namespace Code.Infrastructure.Services.LoadGameLevel
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly SignalBus _signalBus;
-        private int _callCount;
 
         public LoadGameLevelService(GameStateMachine gameStateMachine, SignalBus signalBus)
         {
