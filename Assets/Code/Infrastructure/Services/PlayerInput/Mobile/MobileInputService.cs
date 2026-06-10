@@ -1,4 +1,5 @@
 using Code.Core.Interfaces.Input;
+using Code.Core.Interfaces.Input.InputLock;
 using Code.Infrastructure.Services.PlayerInput.Mobile.Joystick;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ namespace Code.Infrastructure.Services.PlayerInput.Mobile
         private bool _ordinaryAttack;
         private bool _laserAttack;
 
-        public MobileInputService(IVirtualJoystickProvider joystickProvider)
+        public MobileInputService(IVirtualJoystickProvider joystickProvider, IInputLockService inputLockService) :
+            base(inputLockService)
         {
             _joystickProvider = joystickProvider;
         }

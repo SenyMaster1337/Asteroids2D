@@ -1,25 +1,23 @@
 using Code.Core.Interfaces.Input;
+using Code.Core.Interfaces.Input.InputLock;
 using Code.Infrastructure.Services.LevelReset;
+using Code.Infrastructure.Services.PlayerInput.InputLockServices;
 
 namespace Code.Infrastructure.Services.PlayerInput
 {
-    public abstract class InputService : IInputService, IInputLocker, ILevelReset
+    public abstract class InputService : IInputService
     {
-        private bool _isLocked;
+        private readonly IInputLockService _inputLockService;
 
-        public void Lock()
-            => _isLocked = true;
+        protected InputService(IInputLockService inputLockService)
+        {
+            _inputLockService = inputLockService;
+        }
 
-        public void Unlock()
-            => _isLocked = false;
-
-        public void Reset()
-            => Unlock();
-
-        public float Forward => _isLocked ? 0f : GetForward();
-        public float Rotation => _isLocked ? 0f : GetRotation();
-        public bool IsOrdinaryAttack => _isLocked == false && GetOrdinaryAttack();
-        public bool IsLaserAttack => _isLocked == false && GetLaserAttack();
+        public float Forward => _inputLockService.IsLocked ? 0f : GetForward();
+        public float Rotation => _inputLockService.IsLocked ? 0f : GetRotation();
+        public bool IsOrdinaryAttack => _inputLockService.IsLocked == false && GetOrdinaryAttack();
+        public bool IsLaserAttack => _inputLockService.IsLocked == false && GetLaserAttack();
 
         protected abstract float GetForward();
         protected abstract float GetRotation();

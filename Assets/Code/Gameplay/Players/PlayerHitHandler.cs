@@ -1,6 +1,6 @@
 using System;
 using System.Threading;
-using Code.Core.Interfaces.Input;
+using Code.Core.Interfaces.Input.InputLock;
 using Code.Gameplay.Effects;
 using Code.Gameplay.Physics;
 using Cysharp.Threading.Tasks;
@@ -12,20 +12,20 @@ namespace Code.Gameplay.Players
     public class PlayerHitHandler : MonoBehaviour
     {
         private const float DelayBeforeDamage = 0.2f;
-        
+
         private float _invincibilityDuration;
         private bool _isHitProcessing;
 
         private Player _player;
         private PlayerCollisionDetection _playerCollisionDetection;
         private InvulnerabilityEffect _invulnerabilityEffect;
-        private IInputLocker _inputLocker;
+        private IInputLockService _inputLockService;
         private KnockbackToCollision _knockbackToCollision;
         private CancellationTokenSource _hitCts;
 
         [Inject]
-        public void Construct(IInputLocker inputLocker)
-            => _inputLocker = inputLocker;
+        public void Construct(IInputLockService inputLockService)
+            => _inputLockService = inputLockService;
 
         private void Awake()
         {
@@ -73,7 +73,7 @@ namespace Code.Gameplay.Players
                 await UniTask.WaitForSeconds(DelayBeforeDamage, cancellationToken: token);
 
                 _player.Health.TakeDamage();
-                _inputLocker.Lock();
+                _inputLockService.Lock();
                 _playerCollisionDetection.DisableDetection();
                 _invulnerabilityEffect.Play();
 
@@ -86,7 +86,7 @@ namespace Code.Gameplay.Players
             {
                 if (this != null)
                 {
-                    _inputLocker.Unlock();
+                    _inputLockService.Unlock();
                     _playerCollisionDetection.EnableDetection();
                     _invulnerabilityEffect.Stop();
                     _isHitProcessing = false;

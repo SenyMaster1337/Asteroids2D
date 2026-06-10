@@ -8,6 +8,8 @@ using Code.Infrastructure.Services.Analytics;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.GoogleAdsShowers;
 using Code.Infrastructure.Services.PlayerInput;
+using Code.Infrastructure.Services.PlayerInput.InputLockServices;
+using Code.Infrastructure.Services.PlayerInput.Standalone;
 using Code.Infrastructure.Services.StaticData;
 using Code.Infrastructure.States;
 using Code.Infrastructure.States.Factory;
@@ -62,6 +64,8 @@ namespace Code.Infrastructure.Installers
 #else
             Container.BindInterfacesAndSelfTo<StandaloneInputService>().AsSingle();
 #endif
+            
+            Container.BindInterfacesAndSelfTo<InputLockService>().AsSingle();
         }
 
         private void BindSceneLoader()
