@@ -8,8 +8,10 @@ namespace Code.Gameplay.Physics
     {
         [SerializeField] private LayerMaskTypeId _targetLayer;
 
+        private const int MaxCollisionResults = 10;
+
         protected int _layerMask;
-        protected readonly Collider2D[] _results = new Collider2D[10];
+        protected readonly Collider2D[] _results = new Collider2D[MaxCollisionResults];
 
         public event Action<Collider2D> Collided;
 
