@@ -8,7 +8,7 @@ using Code.Infrastructure.Services.Analytics;
 using Code.Infrastructure.Services.ConfigLoaders;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.GoogleAdsShowers;
-using Code.Infrastructure.Services.PlayerInput;
+using Code.Infrastructure.Services.LevelEntryProcessors;
 using Code.Infrastructure.Services.PlayerInput.InputLockServices;
 using Code.Infrastructure.Services.PlayerInput.Standalone;
 using Code.Infrastructure.Services.StaticData;
@@ -38,6 +38,7 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
             Container.BindInterfacesAndSelfTo<FirebaseInitializeService>().AsSingle();
             Container.Bind<IConfigLoader>().To<JsonConfigLoader>().AsSingle();
+            Container.Bind<ILevelEntryProcessor>().To<LevelEntryProcessor>().AsSingle();
 
 #if UNITY_ANDROID || UNITY_IOS
             Container.Bind<IVirtualJoystickProvider>().To<VirtualJoystickProvider>().AsSingle();

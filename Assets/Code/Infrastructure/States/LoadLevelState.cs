@@ -1,7 +1,7 @@
 using Code.Core.LoadingCurtains;
 using Code.Infrastructure.SceneLoaders;
 using Code.Infrastructure.SceneNameConstants;
-using Code.Infrastructure.Services.GoogleAdsShowers;
+using Code.Infrastructure.Services.LevelEntryProcessors;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.States
@@ -10,14 +10,14 @@ namespace Code.Infrastructure.States
     {
         private readonly SceneLoader _sceneLoader;
         private readonly ILoadingCurtainProvider _loadingCurtainProvider;
-        private readonly IGoogleAdsShowerService _googleAdsShowerService;
+        private readonly ILevelEntryProcessor _levelEntryProcessor;
 
         public LoadLevelState(SceneLoader sceneLoader, ILoadingCurtainProvider loadingCurtainProvider,
-            IGoogleAdsShowerService googleAdsShowerService)
+            ILevelEntryProcessor levelEntryProcessor)
         {
             _sceneLoader = sceneLoader;
             _loadingCurtainProvider = loadingCurtainProvider;
-            _googleAdsShowerService = googleAdsShowerService;
+            _levelEntryProcessor = levelEntryProcessor;
         }
 
         public async UniTask Enter(string sceneName)
@@ -33,7 +33,7 @@ namespace Code.Infrastructure.States
 
         private void OnLoaded()
         {
-            _googleAdsShowerService.OnInterAdShower();
+            _levelEntryProcessor.ProcessEntry();
             _loadingCurtainProvider.LoadingCurtain.Hide();
         }
     }

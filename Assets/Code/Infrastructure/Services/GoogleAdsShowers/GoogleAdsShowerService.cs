@@ -11,7 +11,7 @@ namespace Code.Infrastructure.Services.GoogleAdsShowers
             _interAd = interAd;
         }
 
-        public void OnInterAdShower()
+        public void ShowInterAd()
             => _interAd.ShowAd();
     }
 }

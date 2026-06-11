@@ -1,10 +1,9 @@
 using Code.Gameplay.PlayerProviders;
 using Code.Infrastructure.Factories.UIFactories;
-using Zenject;
 
 namespace Code.Infrastructure.Services.LoseServices
 {
-    public class LoseService : ILoseService, ILateDisposable
+    public class LoseService : ILoseService
     {
         private readonly IUIFactory _uiFactory;
         private readonly IPlayerProvider _playerProvider;
@@ -18,10 +17,10 @@ namespace Code.Infrastructure.Services.LoseServices
         public void Init()
             => _playerProvider.Player.Died += OnPlayerDied;
 
-        public void LateDispose()
-            => _playerProvider.Player.Died -= OnPlayerDied;
-
         private void OnPlayerDied()
-            => _uiFactory.CreateRestartView();
+        {
+            _playerProvider.Player.Died -= OnPlayerDied;
+            _uiFactory.CreateRestartView();
+        }
     }
 }

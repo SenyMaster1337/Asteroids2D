@@ -53,7 +53,7 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<PlayerTeleportToAreaService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawnerService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemyWaveService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<LoseService>().AsSingle();
+            Container.Bind<ILoseService>().To<LoseService>().AsSingle();
             Container.BindInterfacesAndSelfTo<LoadGameLevelService>().AsSingle();
             Container.BindInterfacesAndSelfTo<LevelResetService>().AsSingle();
             Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
