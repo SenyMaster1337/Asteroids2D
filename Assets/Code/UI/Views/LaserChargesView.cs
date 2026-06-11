@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class LaserChargesView : MonoBehaviour
     {
         [Data("LaserCharges")] 
-        public TMP_Text Text;
+        [SerializeField] private TMP_Text _text;
     }
 }

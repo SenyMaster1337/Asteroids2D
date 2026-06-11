@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class LaserAttackView : MonoBehaviour
     {
         [Data("LaserAttack")] 
-        public Button Button;
+        [SerializeField] private Button _button;
     }
 }

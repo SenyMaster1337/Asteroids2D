@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class PlayerCoordinatesView : MonoBehaviour
     {
         [Data("Coordinates")]
-        public TMP_Text Text;
+        [SerializeField] private TMP_Text _text;
     }
 }

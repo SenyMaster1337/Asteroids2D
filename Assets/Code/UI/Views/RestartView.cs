@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class RestartView : MonoBehaviour
     {
         [Data("RestartGame")]
-        public Button Button;
+        [SerializeField] private Button _button;
     }
 }

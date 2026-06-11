@@ -6,7 +6,7 @@ namespace Code.UI.Views
 {
     public class StartView : MonoBehaviour
     {
-        [Data("StartGame")]
-        public Button Button;
+        [Data("StartGame")] 
+        [SerializeField] private Button _button;
     }
 }

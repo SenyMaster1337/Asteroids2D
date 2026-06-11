@@ -15,13 +15,18 @@ namespace MVVM
             FieldInfo[] fields = type.GetFields(
                 BindingFlags.Instance |
                 BindingFlags.Public |
+                BindingFlags.NonPublic |
                 BindingFlags.FlattenHierarchy
             );
 
             foreach (var field in fields)
             {
                 MemberAttribute attribute = field.GetCustomAttribute<MemberAttribute>();
-                if (attribute != null)
+                
+                bool isSerialized = field.GetCustomAttribute<SerializeField>() != null;
+                bool isPublic = field.IsPublic;
+
+                if (attribute != null && (isPublic || isSerialized))
                 {
                     members[attribute.id] = field;
                 }

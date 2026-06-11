@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class ScoreView : MonoBehaviour
     {
         [Data("Score")]
-        public TMP_Text Text;
+        [SerializeField] private TMP_Text _text;
     }
 }

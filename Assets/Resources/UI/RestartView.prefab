@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7ba6c79d074c73a2edd4a220d51429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 906694840456843855}
+  _button: {fileID: 906694840456843855}
 --- !u!114 &6712372822699308062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +285,6 @@ MonoBehaviour:
   ViewBinding: 0
   View: {fileID: -2230276744562459331}
   ViewType: {fileID: 0}
-  ViewId: 
   ViewModelBinding: 1
   ViewModel: {fileID: 0}
   ViewModelType: {fileID: 11500000, guid: 53c5f0937ccc417aa0e1cdbb4fc85936, type: 3}
-  ViewModelId: 

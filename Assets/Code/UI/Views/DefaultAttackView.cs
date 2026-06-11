@@ -7,6 +7,6 @@ namespace Code.UI.Views
     public class DefaultAttackView : MonoBehaviour
     {
         [Data("DefaultAttack")] 
-        public Button Button;
+        [SerializeField] private Button _button;
     }
 }

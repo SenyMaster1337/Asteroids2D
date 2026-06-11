@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1265a2dd864a4a189e425da3b4f85aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 2227408014998441501}
+  _button: {fileID: 2227408014998441501}
 --- !u!114 &5457761507833580168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,11 +608,9 @@ MonoBehaviour:
   ViewBinding: 0
   View: {fileID: 2595160178705999615}
   ViewType: {fileID: 0}
-  ViewId: 
   ViewModelBinding: 1
   ViewModel: {fileID: 0}
   ViewModelType: {fileID: 11500000, guid: bae0ef0d9ed644539d5365578258e8fa, type: 3}
-  ViewModelId: 
 --- !u!1 &4541023545280620729
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b1fbe01e9648ef95fbb3dc49359426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Button: {fileID: 7825301124103490104}
+  _button: {fileID: 7825301124103490104}
 --- !u!114 &2725994364700550932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,8 +814,6 @@ MonoBehaviour:
   ViewBinding: 0
   View: {fileID: 559724768445499409}
   ViewType: {fileID: 0}
-  ViewId: 
   ViewModelBinding: 1
   ViewModel: {fileID: 0}
   ViewModelType: {fileID: 11500000, guid: 03243d9ae47940b3a7d6323b8311c818, type: 3}
-  ViewModelId: 
