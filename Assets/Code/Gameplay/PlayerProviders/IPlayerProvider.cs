@@ -6,5 +6,6 @@ namespace Code.Gameplay.PlayerProviders
     {
         Player Player { get; }
         void SetPlayer(Player player);
+        void ClearPlayer();
     }
 }

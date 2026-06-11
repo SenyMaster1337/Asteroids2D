@@ -41,6 +41,7 @@ namespace Code.Gameplay.Players
             if (current <= 0)
             {
                 Died?.Invoke();
+                _playerProvider.ClearPlayer();
                 Destroy(gameObject);
             }
         }

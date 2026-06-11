@@ -14,5 +14,8 @@ namespace Code.Gameplay.PlayerProviders
 
             Player = player;
         }
+        
+        public void ClearPlayer() 
+            => Player = null;
     }
 }
