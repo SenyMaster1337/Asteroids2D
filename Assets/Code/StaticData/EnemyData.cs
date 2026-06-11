@@ -6,6 +6,6 @@ namespace Code.StaticData
     [Serializable]
     public class EnemyData
     {
-        public GameObject Prefab;
+        [field: SerializeField] public GameObject Prefab { get; private set; }
     }
 }

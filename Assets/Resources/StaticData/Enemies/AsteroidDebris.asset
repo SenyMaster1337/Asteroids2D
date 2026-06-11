@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9834837d5e6469198f81da57b8669d8, type: 3}
   m_Name: AsteroidDebris
   m_EditorClassIdentifier: 
-  Type: 2
-  EnemyData:
-    Prefab: {fileID: 3493253889897931786, guid: 66468a04185fede48af40e7024fbe020, type: 3}
+  <Type>k__BackingField: 2
+  <EnemyData>k__BackingField:
+    <Prefab>k__BackingField: {fileID: 3493253889897931786, guid: 66468a04185fede48af40e7024fbe020, type: 3}
