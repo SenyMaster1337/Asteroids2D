@@ -15,7 +15,7 @@ namespace Code.Gameplay.Enemies.Asteroids
         private void FixedUpdate()
         {
             transform.position =
-                CustomPhysicsEngine.MovePosition(transform.position, _body2D.Velocity.Value, Time.fixedDeltaTime);
+                CustomPhysicsEngine.MovePosition(transform.position, _body2D.Velocity.CurrentValue, Time.fixedDeltaTime);
         }
 
         private void Update()
@@ -29,12 +29,12 @@ namespace Code.Gameplay.Enemies.Asteroids
 
         public void Launch(bool randomDirection = false)
         {
-            _body2D.Velocity.Value = randomDirection
+            _body2D.SetVelocity(randomDirection
                 ? Random.insideUnitCircle.normalized * _speed
-                : -transform.position.normalized * _speed;
+                : -transform.position.normalized * _speed);
         }
 
         public void ResetVelocity() 
-            => _body2D.Velocity.Value = Vector2.zero;
+            => _body2D.SetVelocity(Vector2.zero);
     }
 }

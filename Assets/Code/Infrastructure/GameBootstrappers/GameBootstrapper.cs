@@ -16,9 +16,12 @@ namespace Code.Infrastructure.GameBootstrappers
 
         private void Start()
         {
-            _gameStateMachine.Enter<BootstrapState>();
+            EnterBootstrapState();
 
             DontDestroyOnLoad(this);
         }
+
+        private async void EnterBootstrapState() 
+            => await _gameStateMachine.Enter<BootstrapState>();
     }
 }

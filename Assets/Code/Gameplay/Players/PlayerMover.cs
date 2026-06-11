@@ -29,13 +29,13 @@ namespace Code.Gameplay.Players
         {
             if (_inputService.Forward > 0f)
             {
-                _body2D.Velocity.Value = CustomPhysicsEngine.AddForce(
-                    _body2D.Velocity.Value, transform.up * _thrustAcceleration * _inputService.Forward,
-                    _body2D.Mass, Time.fixedDeltaTime, _maxSpeed);
+                _body2D.SetVelocity(CustomPhysicsEngine.AddForce(
+                    _body2D.Velocity.CurrentValue, transform.up * _thrustAcceleration * _inputService.Forward,
+                    _body2D.Mass, Time.fixedDeltaTime, _maxSpeed));
             }
 
             transform.position =
-                CustomPhysicsEngine.MovePosition(transform.position, _body2D.Velocity.Value, Time.fixedDeltaTime);
+                CustomPhysicsEngine.MovePosition(transform.position, _body2D.Velocity.CurrentValue, Time.fixedDeltaTime);
             transform.rotation =
                 CustomPhysicsEngine.MoveRotation(transform.rotation, _angularVelocity, Time.fixedDeltaTime);
         }

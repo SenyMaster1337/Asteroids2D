@@ -22,7 +22,7 @@ namespace Code.UI.ViewModels
         public void Initialize()
         {
             var body = _playerProvider.Player.PlayerPhysicsBody2D;
-            Velocity.Value = $"{body.Velocity.Value.magnitude:F2}";
+            Velocity.Value = $"{body.Velocity.CurrentValue.magnitude:F2}";
             _subscription = body.Velocity.Subscribe(value => Velocity.Value = $"{value.magnitude:F2}");
         }
 

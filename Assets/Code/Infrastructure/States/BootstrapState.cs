@@ -28,10 +28,8 @@ namespace Code.Infrastructure.States
             }
         }
 
-        private void EnterLoadLevel()
-        {
-            _gameStateMachine.Enter<LoadMainMenuState, string>(SceneNames.Menu);
-        }
+        private async void EnterLoadLevel() 
+            => await _gameStateMachine.Enter<LoadMainMenuState, string>(SceneNames.Menu);
 
         public void Exit()
         {

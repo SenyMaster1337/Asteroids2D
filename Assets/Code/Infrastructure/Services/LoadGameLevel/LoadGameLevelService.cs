@@ -29,7 +29,7 @@ namespace Code.Infrastructure.Services.LoadGameLevel
             _signalBus.Unsubscribe<StartGameSignal>(OnGameRestarted);
         }
 
-        private void OnGameRestarted()
-            => _gameStateMachine.Enter<LoadLevelState, string>(SceneNames.Main);
+        private async void OnGameRestarted() 
+            => await _gameStateMachine.Enter<LoadLevelState, string>(SceneNames.Main);
     }
 }

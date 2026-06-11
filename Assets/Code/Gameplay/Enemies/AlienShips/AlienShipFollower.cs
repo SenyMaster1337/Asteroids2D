@@ -14,7 +14,7 @@ namespace Code.Gameplay.Enemies.AlienShips
         private IPlayerProvider _playerProvider;
 
         [Inject]
-        public void Construct(IPlayerProvider playerProvider) 
+        public void Construct(IPlayerProvider playerProvider)
             => _playerProvider = playerProvider;
 
         private void Awake() =>
@@ -29,7 +29,7 @@ namespace Code.Gameplay.Enemies.AlienShips
             }
 
             Vector2 desired = DirectionTo(_playerProvider.Player.transform.position) * _speed;
-            _body2D.Velocity.Value = Vector2.Lerp(_body2D.Velocity.Value, desired, Time.fixedDeltaTime * _agility);
+            _body2D.SetVelocity(Vector2.Lerp(_body2D.Velocity.CurrentValue, desired, Time.fixedDeltaTime * _agility));
             MoveBody();
         }
 
@@ -37,11 +37,11 @@ namespace Code.Gameplay.Enemies.AlienShips
         {
             if (_playerProvider.Player == null)
             {
-                _body2D.Velocity.Value = Random.insideUnitCircle.normalized * _speed;
+                _body2D.SetVelocity(Random.insideUnitCircle.normalized * _speed);
                 return;
             }
 
-            _body2D.Velocity.Value = DirectionTo(_playerProvider.Player.transform.position) * _speed;
+            _body2D.SetVelocity(DirectionTo(_playerProvider.Player.transform.position) * _speed);
         }
 
         public void Init(float speed, float agility)
@@ -52,7 +52,7 @@ namespace Code.Gameplay.Enemies.AlienShips
 
         private void MoveBody() =>
             transform.position = CustomPhysicsEngine.MovePosition(
-                transform.position, _body2D.Velocity.Value, Time.fixedDeltaTime);
+                transform.position, _body2D.Velocity.CurrentValue, Time.fixedDeltaTime);
 
         private Vector2 DirectionTo(Vector3 target) =>
             (target - transform.position).normalized;

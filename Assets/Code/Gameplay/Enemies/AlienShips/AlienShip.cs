@@ -20,6 +20,6 @@ namespace Code.Gameplay.Enemies.AlienShips
             => _alienShipFollower.Launch();
 
         public override void ResetVelocity()
-            => _body2D.Velocity.Value = Vector2.zero;
+            => _body2D.SetVelocity(Vector2.zero);
     }
 }

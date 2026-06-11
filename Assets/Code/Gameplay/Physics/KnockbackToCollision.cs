@@ -29,7 +29,7 @@ namespace Code.Gameplay.Physics
         private void OnKnockedBack(Collider2D collider)
         {
             Vector2 direction = (transform.position - collider.transform.position).normalized;
-            _body.Velocity.Value += direction * _knockbackForce;
+            _body.AddVelocity(direction * _knockbackForce);
             Knocked?.Invoke();
         }
     }
