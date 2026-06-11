@@ -1,17 +1,17 @@
-using Code.Infrastructure.Services.GoogleAdsShowers;
+using Code.Infrastructure.Services.AdsServices;
 
 namespace Code.Infrastructure.Services.LevelEntryProcessors
 {
     public class LevelEntryProcessor : ILevelEntryProcessor
     {
-        private readonly IGoogleAdsShowerService _adsShower;
+        private readonly IAdsService _adsService;
 
-        public LevelEntryProcessor(IGoogleAdsShowerService adsShower)
+        public LevelEntryProcessor(IAdsService adsService)
         {
-            _adsShower = adsShower;
+            _adsService = adsService;
         }
 
         public void ProcessEntry()
-            => _adsShower.ShowInterAd();
+            => _adsService.ShowInterAd();
     }
 }

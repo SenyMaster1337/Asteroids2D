@@ -2,12 +2,11 @@ using Code.Core.ConfigLoaders;
 using Code.Core.LoadingCurtains;
 using Code.Core.Signals;
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.GoogleAds;
 using Code.Infrastructure.SceneLoaders;
+using Code.Infrastructure.Services.AdsServices;
 using Code.Infrastructure.Services.Analytics;
 using Code.Infrastructure.Services.ConfigLoaders;
 using Code.Infrastructure.Services.ConfigServices;
-using Code.Infrastructure.Services.GoogleAdsShowers;
 using Code.Infrastructure.Services.LevelEntryProcessors;
 using Code.Infrastructure.Services.PlayerInput.InputLockServices;
 using Code.Infrastructure.Services.PlayerInput.Standalone;
@@ -28,7 +27,6 @@ namespace Code.Infrastructure.Installers
             BindSceneLoader();
             BindServices();
             BindSignals();
-            BindGoogleAds();
         }
 
         private void BindServices()
@@ -39,6 +37,7 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<FirebaseInitializeService>().AsSingle();
             Container.Bind<IConfigLoader>().To<JsonConfigLoader>().AsSingle();
             Container.Bind<ILevelEntryProcessor>().To<LevelEntryProcessor>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AdsService>().AsSingle();
 
 #if UNITY_ANDROID || UNITY_IOS
             Container.Bind<IVirtualJoystickProvider>().To<VirtualJoystickProvider>().AsSingle();
@@ -66,7 +65,7 @@ namespace Code.Infrastructure.Installers
 #else
             Container.BindInterfacesAndSelfTo<StandaloneInputService>().AsSingle();
 #endif
-            
+
             Container.BindInterfacesAndSelfTo<InputLockService>().AsSingle();
         }
 
@@ -80,12 +79,6 @@ namespace Code.Infrastructure.Installers
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<StartGameSignal>();
             Container.DeclareSignal<RestartGameSignal>();
-        }
-
-        private void BindGoogleAds()
-        {
-            Container.BindInterfacesAndSelfTo<InterAd>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GoogleAdsShowerService>().AsSingle();
         }
     }
 }

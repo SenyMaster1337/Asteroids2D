@@ -2,9 +2,9 @@ using GoogleMobileAds.Api;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Infrastructure.GoogleAds
+namespace Code.Infrastructure.Services.AdsServices
 {
-    public class InterAd : IInitializable
+    public class AdsService : IInitializable, IAdsService
     {
         private const string InterstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
 
@@ -12,7 +12,16 @@ namespace Code.Infrastructure.GoogleAds
 
         public void Initialize()
         {
+            MobileAds.Initialize(initStatus => { });
             LoadAd();
+        }
+
+        public void ShowInterAd()
+        {
+            if (_interstitialAd != null && _interstitialAd.CanShowAd())
+            {
+                _interstitialAd.Show();
+            }
         }
 
         private void LoadAd()
@@ -35,14 +44,6 @@ namespace Code.Infrastructure.GoogleAds
                 _interstitialAd = ad;
                 RegisterEventHandlers();
             });
-        }
-
-        public void ShowAd()
-        {
-            if (_interstitialAd != null && _interstitialAd.CanShowAd())
-            {
-                _interstitialAd.Show();
-            }
         }
 
         private void RegisterEventHandlers()
