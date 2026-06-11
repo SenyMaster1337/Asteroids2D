@@ -1,5 +1,6 @@
 using Code.Core.CameraProviders;
 using Code.Gameplay;
+using Code.Gameplay.Cameras;
 using Code.Infrastructure.Factories.AreaFactories;
 using Code.Infrastructure.Factories.PlayerFactories;
 using Code.Infrastructure.Factories.UIFactories;

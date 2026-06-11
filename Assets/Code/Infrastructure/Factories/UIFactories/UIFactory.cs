@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Factories.UIFactories
         public GameObject CreateMobileInput()
         {
             var mobileInputPrefab = _assetProvider.Load(AssetPath.MobileInputPath);
-            
+
             return _instantiator.InstantiatePrefab(mobileInputPrefab, _uiRoot.transform);
         }
 
@@ -50,16 +50,13 @@ namespace Code.Infrastructure.Factories.UIFactories
             var healthPrefab = _assetProvider.Load(AssetPath.PlayerHealthViewPath);
 
             PlayerHealthConfig healthConfig = _configService.Player.Health;
-            
+
             GameObject prefab = _instantiator.InstantiatePrefab(healthPrefab, _uiRoot.transform);
 
             var healthView = prefab.GetComponent<HealthView>();
 
             for (int i = 0; i < healthConfig.MaxHealth; i++)
-            {
-                var heart = CreateHeartView(prefab.transform);
-                healthView.Hearts.Add(heart);
-            }
+                healthView.AddHeart(CreateHeartView(prefab.transform));
 
             return prefab.gameObject;
         }

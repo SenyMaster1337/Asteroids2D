@@ -7,6 +7,9 @@ namespace Code.UI.Views
     public class HealthView : MonoBehaviour
     {
         [Data("Health")]
-        public List<GameObject> Hearts;
+        [SerializeField] private List<GameObject> _hearts;
+        
+        public void AddHeart(GameObject heart) 
+            => _hearts.Add(heart);
     }
 }

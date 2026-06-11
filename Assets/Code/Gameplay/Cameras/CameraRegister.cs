@@ -2,7 +2,7 @@ using Code.Core.CameraProviders;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Gameplay
+namespace Code.Gameplay.Cameras
 {
     public class CameraRegister : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Gameplay
+namespace Code.Gameplay.Cameras
 {
     public class CameraZoom : MonoBehaviour
     {
