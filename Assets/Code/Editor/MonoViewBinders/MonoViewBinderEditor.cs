@@ -2,7 +2,7 @@ using Code.UI.Binders;
 using UnityEditor;
 using UnityEngine;
 
-namespace Code.Editor
+namespace Code.Editor.MonoViewBinders
 {
     [CustomEditor(typeof(MonoViewBinder))]
     public class MonoViewBinderEditor : UnityEditor.Editor

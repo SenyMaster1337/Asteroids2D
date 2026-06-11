@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Code.Infrastructure.SwitchToEntryScenes
+namespace Code.Editor.SwitchToEntryScenes
 {
     public class SwitchToEntrySceneInEditor : MonoBehaviour
     {
-#if UNITY_EDITOR
         private const string EntrySceneName = "Initial";
 
         private void Awake()
@@ -19,6 +18,5 @@ namespace Code.Infrastructure.SwitchToEntryScenes
 
             SceneManager.LoadScene(EntrySceneName);
         }
-#endif
     }
 }
