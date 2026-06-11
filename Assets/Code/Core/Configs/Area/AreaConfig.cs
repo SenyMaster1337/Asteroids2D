@@ -1,4 +1,4 @@
-namespace Code.Infrastructure.Services.ConfigLoaders.Area
+namespace Code.Core.Configs.Area
 {
     public class AreaConfig
     {

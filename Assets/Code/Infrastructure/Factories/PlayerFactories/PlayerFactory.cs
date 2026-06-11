@@ -1,8 +1,8 @@
+using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Lasers;
 using Code.Gameplay.Physics;
 using Code.Gameplay.Players;
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.Services.ConfigServices;
 using UnityEngine;
 using Zenject;
 

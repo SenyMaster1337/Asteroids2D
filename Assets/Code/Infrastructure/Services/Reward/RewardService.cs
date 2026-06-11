@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Core.Interfaces.Score;
-using Code.Infrastructure.Services.ConfigServices;
 using Code.StaticData;
 using Zenject;
 

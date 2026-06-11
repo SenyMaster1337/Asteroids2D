@@ -1,12 +1,13 @@
 using Code.Infrastructure.Services.ConfigLoaders.Player;
 using Code.Infrastructure.Services.ConfigLoaders.Rewards;
 
-namespace Code.Infrastructure.Services.ConfigLoaders.Enemies.AsteroidDebris
+namespace Code.Core.Configs.Enemies.Asteroid
 {
-    public class AsteroidDebrisConfig
+    public class AsteroidConfig
     {
-        public PhysicsConfig Physics;
+        public int AsteroidDebrisCount;
         public AsteroidMoverConfig Mover;
+        public PhysicsConfig Physics;
         public RewardConfig Reward;
     }
 }

@@ -1,6 +1,6 @@
+using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Area;
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.Services.ConfigServices;
 using UnityEngine;
 using Zenject;
 
@@ -25,7 +25,7 @@ namespace Code.Infrastructure.Factories.AreaFactories
         {
             var prefab = _assetProvider.Load(AssetPath.GameAreaPath);
             GameObject area = _instantiator.InstantiatePrefab(prefab);
-            
+
             var areaConfig = _configService.Area;
 
             area.GetComponent<GameArea>().Init(areaConfig.WorldWidth, areaConfig.WorldHeight);

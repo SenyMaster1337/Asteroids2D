@@ -1,8 +1,8 @@
-using Code.Infrastructure.Services.ConfigLoaders.Area;
-using Code.Infrastructure.Services.ConfigLoaders.Enemies;
+using Code.Core.Configs.Area;
+using Code.Core.Configs.Enemies;
 using Code.Infrastructure.Services.ConfigLoaders.Player;
 
-namespace Code.Infrastructure.Services.ConfigServices
+namespace Code.Core.Interfaces.ConfigServices
 {
     public interface IConfigService
     {

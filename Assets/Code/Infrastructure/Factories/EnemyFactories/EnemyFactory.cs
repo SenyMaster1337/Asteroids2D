@@ -1,6 +1,6 @@
 using Code.Core.BaseEnemies;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Enemies;
-using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.StaticData;
 using Code.StaticData;
 using UnityEngine;

@@ -1,7 +1,8 @@
+using Code.Core.ConfigLoaders;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Code.Core.ConfigLoaders
+namespace Code.Infrastructure.Services.ConfigLoaders
 {
     public class JsonConfigLoader : IConfigLoader
     {

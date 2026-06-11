@@ -5,6 +5,7 @@ using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.GoogleAds;
 using Code.Infrastructure.SceneLoaders;
 using Code.Infrastructure.Services.Analytics;
+using Code.Infrastructure.Services.ConfigLoaders;
 using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.GoogleAdsShowers;
 using Code.Infrastructure.Services.PlayerInput;

@@ -1,11 +1,10 @@
 using Code.Core.CameraProviders;
-using Code.Gameplay;
+using Code.Core.Configs.Area;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Cameras;
 using Code.Infrastructure.Factories.AreaFactories;
 using Code.Infrastructure.Factories.PlayerFactories;
 using Code.Infrastructure.Factories.UIFactories;
-using Code.Infrastructure.Services.ConfigLoaders.Area;
-using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.EnemyWave;
 using Code.Infrastructure.Services.LoseServices;
 using Code.Infrastructure.Services.PlayerTeleports;

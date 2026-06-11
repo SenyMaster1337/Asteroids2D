@@ -1,7 +1,7 @@
 using Code.Infrastructure.Services.ConfigLoaders.Player;
 using Code.Infrastructure.Services.ConfigLoaders.Rewards;
 
-namespace Code.Infrastructure.Services.ConfigLoaders.Enemies.AlienShip
+namespace Code.Core.Configs.Enemies.AlienShip
 {
     public class AlienShipConfig
     {

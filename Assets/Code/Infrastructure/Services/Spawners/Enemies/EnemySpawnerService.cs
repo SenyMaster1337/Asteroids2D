@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Code.Core.BaseEnemies;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Core.Interfaces.Spawners;
 using Code.Gameplay.Area;
 using Code.Infrastructure.Factories.EnemyFactories;
-using Code.Infrastructure.Services.ConfigServices;
 using Code.Infrastructure.Services.ObjectPools;
 using Code.StaticData;
 using UnityEngine;

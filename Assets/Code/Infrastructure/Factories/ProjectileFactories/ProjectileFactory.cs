@@ -1,8 +1,8 @@
 using Code.Core.ConfigLoaders;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Bullets;
 using Code.Gameplay.Lasers;
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.Services.ConfigServices;
 using UnityEngine;
 using Zenject;
 
@@ -25,9 +25,9 @@ namespace Code.Infrastructure.Factories.ProjectileFactories
         {
             var bulletPrefab = _assetProvider.Load(AssetPath.PlayerBulletPath);
 
-            BulletConfig bulletConfig = _configService.Player.Bullet;
-
             GameObject bullet = _instantiator.InstantiatePrefab(bulletPrefab);
+
+            BulletConfig bulletConfig = _configService.Player.Bullet;
             bullet.GetComponent<Bullet>().Init(bulletConfig.Lifetime, bulletConfig.Speed);
 
             return bullet;

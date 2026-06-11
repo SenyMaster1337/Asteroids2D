@@ -1,4 +1,4 @@
-namespace Code.Infrastructure.Services.ConfigLoaders.Enemies
+namespace Code.Core.Configs.Enemies
 {
     public class EnemySpawnConfig
     {

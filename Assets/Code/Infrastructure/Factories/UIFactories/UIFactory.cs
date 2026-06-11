@@ -1,6 +1,6 @@
 using Code.Core.ConfigLoaders;
+using Code.Core.Interfaces.ConfigServices;
 using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.Services.ConfigServices;
 using Code.UI.Views;
 using UnityEngine;
 using Zenject;
@@ -49,9 +49,8 @@ namespace Code.Infrastructure.Factories.UIFactories
         {
             var healthPrefab = _assetProvider.Load(AssetPath.PlayerHealthViewPath);
 
-            PlayerHealthConfig healthConfig = _configService.Player.Health;
-
             GameObject prefab = _instantiator.InstantiatePrefab(healthPrefab, _uiRoot.transform);
+            PlayerHealthConfig healthConfig = _configService.Player.Health;
 
             var healthView = prefab.GetComponent<HealthView>();
 

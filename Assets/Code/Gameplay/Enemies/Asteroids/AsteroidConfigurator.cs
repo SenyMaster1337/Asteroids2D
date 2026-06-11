@@ -1,5 +1,5 @@
+using Code.Core.Configs.Enemies;
 using Code.Gameplay.Physics;
-using Code.Infrastructure.Services.ConfigLoaders.Enemies;
 using UnityEngine;
 
 namespace Code.Gameplay.Enemies.Asteroids

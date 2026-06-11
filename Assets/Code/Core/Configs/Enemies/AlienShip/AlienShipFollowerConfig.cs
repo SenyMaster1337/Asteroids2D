@@ -1,4 +1,4 @@
-namespace Code.Infrastructure.Services.ConfigLoaders.Enemies.AlienShip
+namespace Code.Core.Configs.Enemies.AlienShip
 {
     public class AlienShipFollowerConfig
     {

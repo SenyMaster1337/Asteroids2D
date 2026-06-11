@@ -1,4 +1,4 @@
-using Code.Infrastructure.Services.ConfigLoaders.Enemies;
+using Code.Core.Configs.Enemies;
 
 namespace Code.Gameplay.Enemies
 {
