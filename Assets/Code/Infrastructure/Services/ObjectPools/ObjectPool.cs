@@ -7,7 +7,6 @@ namespace Code.Infrastructure.Services.ObjectPools
     {
         private readonly Func<T> _factory;
         private readonly Queue<T> _pool = new();
-        private readonly HashSet<T> _activeObjects = new();
         private readonly int _initialCount;
 
         public ObjectPool(Func<T> factory, int initialCount)
@@ -26,16 +25,9 @@ namespace Code.Infrastructure.Services.ObjectPools
         }
 
         public T Get()
-        {
-            T obj = _pool.Count > 0 ? _pool.Dequeue() : _factory();
-            _activeObjects.Add(obj);
-            return obj;
-        }
+            => _pool.Count > 0 ? _pool.Dequeue() : _factory();
 
         public void Return(T obj)
-        {
-            _activeObjects.Remove(obj);
-            _pool.Enqueue(obj);
-        }
+            => _pool.Enqueue(obj);
     }
 }
