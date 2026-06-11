@@ -6,14 +6,14 @@ using Zenject;
 
 namespace Code.Infrastructure.Services.Spawners.Projectile
 {
-    public class LaserSpawnersService : ILaserSpawnerService, IInitializable
+    public class LaserSpawnerService : ILaserSpawnerService, IInitializable
     {
         private readonly IProjectileFactory _factory;
 
         private Laser _laser;
         private bool _isActive;
 
-        public LaserSpawnersService(IProjectileFactory factory)
+        public LaserSpawnerService(IProjectileFactory factory)
         {
             _factory = factory;
         }

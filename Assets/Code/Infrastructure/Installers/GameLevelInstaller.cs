@@ -48,7 +48,7 @@ namespace Code.Infrastructure.Installers
         {
             Container.BindInterfacesAndSelfTo<BulletSpawnerService>().AsSingle();
             Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
-            Container.BindInterfacesAndSelfTo<LaserSpawnersService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LaserSpawnerService>().AsSingle();
             Container.Bind<IGameAreaProvider>().To<GameAreaProvider>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerTeleportToAreaService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EnemySpawnerService>().AsSingle();

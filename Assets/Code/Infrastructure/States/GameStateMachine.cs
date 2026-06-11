@@ -1,4 +1,5 @@
 using Code.Infrastructure.States.Factory;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.States
 {
@@ -12,16 +13,16 @@ namespace Code.Infrastructure.States
             _stateFactory = stateFactory;
         }
 
-        public void Enter<TState>() where TState : class, IState
+        public async UniTask Enter<TState>() where TState : class, IState
         {
             IState state = ChangeState<TState>();
-            state.Enter();
+            await state.Enter();
         }
 
-        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
+        public async UniTask Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
             TState state = ChangeState<TState>();
-            state.Enter(payload);
+            await state.Enter(payload);
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState
