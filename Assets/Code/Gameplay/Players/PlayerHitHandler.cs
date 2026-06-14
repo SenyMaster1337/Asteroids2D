@@ -54,7 +54,7 @@ namespace Code.Gameplay.Players
             _hitCts = null;
         }
 
-        private async void OnKnocked()
+        private void OnKnocked()
         {
             if (_isHitProcessing)
                 return;
@@ -63,7 +63,7 @@ namespace Code.Gameplay.Players
             CancelHit();
             _hitCts = new CancellationTokenSource();
 
-            await OnHitAsync(_hitCts.Token);
+            OnHitAsync(_hitCts.Token).Forget();
         }
 
         private async UniTask OnHitAsync(CancellationToken token)
