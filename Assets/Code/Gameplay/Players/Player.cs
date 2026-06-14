@@ -15,7 +15,7 @@ namespace Code.Gameplay.Players
         public PhysicsBody2D PlayerPhysicsBody2D { get; private set; }
 
         public event Action Died;
-        
+
         private IPlayerProvider _playerProvider;
         private IDisposable _healthSubscription;
 
@@ -34,14 +34,16 @@ namespace Code.Gameplay.Players
             => _healthSubscription = Health.Current.Subscribe(OnHealthChanged);
 
         private void OnDestroy()
-            => _healthSubscription?.Dispose();
+        {
+            _healthSubscription?.Dispose();
+            _playerProvider.ClearPlayer();
+        }
 
         private void OnHealthChanged(int current)
         {
             if (current <= 0)
             {
                 Died?.Invoke();
-                _playerProvider.ClearPlayer();
                 Destroy(gameObject);
             }
         }
