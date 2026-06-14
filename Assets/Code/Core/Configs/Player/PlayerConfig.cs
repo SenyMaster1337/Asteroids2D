@@ -1,8 +1,6 @@
-using Code.Core.ConfigLoaders;
-
-namespace Code.Infrastructure.Services.ConfigLoaders.Player
+namespace Code.Core.Configs.Player
 {
-    public class PlayerConfig
+    public class PlayerConfig : IConfigValidate
     {
         public PhysicsConfig Physics;
         public PlayerMoverConfig Mover;
@@ -10,5 +8,15 @@ namespace Code.Infrastructure.Services.ConfigLoaders.Player
         public BulletConfig Bullet;
         public LaserConfig Laser;
         public PlayerInvincibilityConfig Invincibility;
+        
+        public void Validate()
+        {
+            Health.Validate();
+            Mover.Validate();
+            Bullet.Validate();
+            Laser.Validate();
+            Invincibility.Validate();
+            Physics.Validate();
+        }
     }
 }

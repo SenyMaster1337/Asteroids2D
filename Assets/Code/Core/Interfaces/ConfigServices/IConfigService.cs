@@ -1,6 +1,6 @@
 using Code.Core.Configs.Area;
 using Code.Core.Configs.Enemies;
-using Code.Infrastructure.Services.ConfigLoaders.Player;
+using Code.Core.Configs.Player;
 
 namespace Code.Core.Interfaces.ConfigServices
 {

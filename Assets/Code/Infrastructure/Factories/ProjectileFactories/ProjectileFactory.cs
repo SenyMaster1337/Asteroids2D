@@ -1,4 +1,5 @@
 using Code.Core.ConfigLoaders;
+using Code.Core.Configs.Player;
 using Code.Core.Interfaces.ConfigServices;
 using Code.Gameplay.Bullets;
 using Code.Gameplay.Lasers;
