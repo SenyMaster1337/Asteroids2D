@@ -1,4 +1,5 @@
 using Code.Infrastructure.States;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -16,12 +17,8 @@ namespace Code.Infrastructure.GameBootstrappers
 
         private void Start()
         {
-            EnterBootstrapState();
-
             DontDestroyOnLoad(this);
+            _gameStateMachine.Enter<BootstrapState>().Forget();
         }
-
-        private async void EnterBootstrapState() 
-            => await _gameStateMachine.Enter<BootstrapState>();
     }
 }
