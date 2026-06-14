@@ -22,18 +22,9 @@ namespace Code.Infrastructure.States
 
         public async UniTask Enter()
         {
-            if (SceneManager.GetActiveScene().name == SceneNames.Initial)
-            {
-                EnterLoadLevel();
-            }
-            else
-            {
-                await _sceneLoader.LoadScene(SceneNames.Initial, onLoaded: EnterLoadLevel);
-            }
-        }
+            if (SceneManager.GetActiveScene().name != SceneNames.Initial)
+                await _sceneLoader.LoadScene(SceneNames.Initial);
 
-        private async void EnterLoadLevel()
-        {
             await _firebaseInitializeService.InitializeAsync();
             await _gameStateMachine.Enter<LoadMainMenuState, string>(SceneNames.Menu);
         }
