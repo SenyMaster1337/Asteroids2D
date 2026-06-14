@@ -15,7 +15,7 @@ namespace Code.Infrastructure.Services.PlayerInput.InputLockServices
         public void Unlock()
             => _isLocked = false;
 
-        public void Reset()
+        public void ResetService()
             => Unlock();
     }
 }

@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Code.Core.Interfaces.ConfigServices;
 using Code.Core.Interfaces.Spawners;
+using Code.Infrastructure.Services.LevelReset;
 using Code.StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace Code.Infrastructure.Services.EnemyWave
 {
-    public class EnemyWaveService : IEnemyWaveService, ITickable, IInitializable
+    public class EnemyWaveService : IEnemyWaveService, ITickable, IInitializable, ILevelReset
     {
         private class WaveEntry
         {
@@ -65,5 +66,11 @@ namespace Code.Infrastructure.Services.EnemyWave
 
         public void StartWave()
             => _isActive = true;
+
+        public void ResetService() 
+            => StopWave();
+
+        private void StopWave() 
+            => _isActive = false;
     }
 }

@@ -25,7 +25,7 @@ namespace Code.Infrastructure.Services.LevelReset
         private void StartResetProcess()
         {
             foreach (var service in _resettableServices)
-                service.Reset();
+                service.ResetService();
         }
     }
 }
