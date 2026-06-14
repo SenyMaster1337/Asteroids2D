@@ -2,12 +2,12 @@ using Code.Core.ConfigLoaders;
 using Code.Core.LoadingCurtains;
 using Code.Core.Signals;
 using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.Events;
 using Code.Infrastructure.SceneLoaders;
 using Code.Infrastructure.Services.AdsServices;
 using Code.Infrastructure.Services.Analytics;
 using Code.Infrastructure.Services.ConfigLoaders;
 using Code.Infrastructure.Services.ConfigServices;
-using Code.Infrastructure.Services.LevelEntryProcessors;
 using Code.Infrastructure.Services.PlayerInput.InputLockServices;
 using Code.Infrastructure.Services.PlayerInput.Standalone;
 using Code.Infrastructure.Services.StaticData;
@@ -26,6 +26,7 @@ namespace Code.Infrastructure.Installers
             BindStates();
             BindSceneLoader();
             BindServices();
+            BindEvents();
             BindSignals();
         }
 
@@ -36,7 +37,6 @@ namespace Code.Infrastructure.Installers
             Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
             Container.BindInterfacesAndSelfTo<FirebaseInitializeService>().AsSingle();
             Container.Bind<IConfigLoader>().To<JsonConfigLoader>().AsSingle();
-            Container.Bind<ILevelEntryProcessor>().To<LevelEntryProcessor>().AsSingle();
             Container.BindInterfacesAndSelfTo<AdsService>().AsSingle();
 
 #if UNITY_ANDROID || UNITY_IOS
@@ -72,6 +72,11 @@ namespace Code.Infrastructure.Installers
         private void BindSceneLoader()
         {
             Container.Bind<SceneLoader>().AsSingle();
+        }
+        
+        private void BindEvents()
+        {
+            Container.Bind<LevelEntryEvent>().AsSingle();
         }
 
         private void BindSignals()

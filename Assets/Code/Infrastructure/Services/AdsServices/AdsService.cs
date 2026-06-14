@@ -1,27 +1,41 @@
+using System;
+using Code.Infrastructure.Events;
 using GoogleMobileAds.Api;
 using UnityEngine;
 using Zenject;
 
 namespace Code.Infrastructure.Services.AdsServices
 {
-    public class AdsService : IInitializable, IAdsService
+    public class AdsService : IInitializable, IDisposable, IAdsService
     {
         private const string InterstitialUnitId = "ca-app-pub-3940256099942544/1033173712";
 
+        private readonly LevelEntryEvent _levelEntryEvent;
+
         private InterstitialAd _interstitialAd;
+
+        public AdsService(LevelEntryEvent levelEntryEvent)
+        {
+            _levelEntryEvent = levelEntryEvent;
+        }
 
         public void Initialize()
         {
             MobileAds.Initialize(initStatus => { });
             LoadAd();
+
+            _levelEntryEvent.OnLevelEntry += ShowInterAd;
         }
 
-        public void ShowInterAd()
+        public void Dispose()
+        {
+            _levelEntryEvent.OnLevelEntry -= ShowInterAd;
+        }
+
+        private void ShowInterAd()
         {
             if (_interstitialAd != null && _interstitialAd.CanShowAd())
-            {
                 _interstitialAd.Show();
-            }
         }
 
         private void LoadAd()

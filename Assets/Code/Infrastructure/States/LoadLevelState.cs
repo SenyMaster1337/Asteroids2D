@@ -1,7 +1,7 @@
 using Code.Core.LoadingCurtains;
+using Code.Infrastructure.Events;
 using Code.Infrastructure.SceneLoaders;
 using Code.Infrastructure.SceneNameConstants;
-using Code.Infrastructure.Services.LevelEntryProcessors;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.States
@@ -10,14 +10,14 @@ namespace Code.Infrastructure.States
     {
         private readonly SceneLoader _sceneLoader;
         private readonly ILoadingCurtainProvider _loadingCurtainProvider;
-        private readonly ILevelEntryProcessor _levelEntryProcessor;
+        private readonly LevelEntryEvent _levelEntryEvent;
 
         public LoadLevelState(SceneLoader sceneLoader, ILoadingCurtainProvider loadingCurtainProvider,
-            ILevelEntryProcessor levelEntryProcessor)
+            LevelEntryEvent levelEntryEvent)
         {
             _sceneLoader = sceneLoader;
             _loadingCurtainProvider = loadingCurtainProvider;
-            _levelEntryProcessor = levelEntryProcessor;
+            _levelEntryEvent = levelEntryEvent;
         }
 
         public async UniTask Enter(string sceneName)
@@ -33,7 +33,7 @@ namespace Code.Infrastructure.States
 
         private void OnLoaded()
         {
-            _levelEntryProcessor.ProcessEntry();
+            _levelEntryEvent.Notify();
             _loadingCurtainProvider.LoadingCurtain.Hide();
         }
     }
