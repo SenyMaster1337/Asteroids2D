@@ -28,7 +28,10 @@ namespace Code.Infrastructure.Factories.EnemyFactories
             GameObject enemy = _instantiator.InstantiatePrefab(prefab);
 
             enemy.GetComponent<BaseEnemy>().InitType(type);
-            enemy.GetComponent<IEnemyConfigurator>().Configure(_configService.Enemies);
+
+            if (enemy.TryGetComponent<IEnemyConfigurator>(out var configurator))
+                configurator.Configure(_configService.Enemies);
+
             return enemy;
         }
     }
