@@ -1,8 +1,8 @@
-using System;
 using Code.Core.ConfigLoaders;
 using Code.Core.Configs.Area;
 using Code.Core.Configs.Enemies;
 using Code.Core.Configs.Player;
+using Code.Core.Configs.Rewards;
 using Code.Core.Interfaces.ConfigServices;
 using Code.Infrastructure.Services.ConfigLoaders;
 using Zenject;
@@ -17,6 +17,7 @@ namespace Code.Infrastructure.Services.ConfigServices
         public EnemiesConfig Enemies { get; private set; }
         public AreaConfig Area { get; private set; }
         public EnemySpawnConfig EnemySpawn { get; private set; }
+        public RewardsConfig Rewards { get; private set; }
 
         public ConfigService(IConfigLoader loader)
         {
@@ -35,6 +36,7 @@ namespace Code.Infrastructure.Services.ConfigServices
             Enemies = _loader.Load<EnemiesConfig>(ConfigPath.Enemies);
             Area = _loader.Load<AreaConfig>(ConfigPath.Area);
             EnemySpawn = _loader.Load<EnemySpawnConfig>(ConfigPath.EnemySpawn);
+            Rewards = _loader.Load<RewardsConfig>(ConfigPath.Rewards);
         }
 
         private void Validate()

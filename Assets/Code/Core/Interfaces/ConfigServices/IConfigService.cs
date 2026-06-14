@@ -1,6 +1,7 @@
 using Code.Core.Configs.Area;
 using Code.Core.Configs.Enemies;
 using Code.Core.Configs.Player;
+using Code.Core.Configs.Rewards;
 
 namespace Code.Core.Interfaces.ConfigServices
 {
@@ -10,5 +11,6 @@ namespace Code.Core.Interfaces.ConfigServices
         EnemiesConfig Enemies { get; }
         AreaConfig Area { get; }
         EnemySpawnConfig EnemySpawn { get; }
+        RewardsConfig Rewards { get; }
     }
 }

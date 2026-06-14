@@ -1,0 +1,7 @@
+{
+  "EnemyKillRewards": [
+    { "EnemyType": "Asteroid", "Reward": 100 },
+    { "EnemyType": "AsteroidDebris", "Reward": 50 },
+    { "EnemyType": "AlienShip", "Reward": 200 }
+  ]
+}

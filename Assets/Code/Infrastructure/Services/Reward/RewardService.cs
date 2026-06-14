@@ -20,11 +20,8 @@ namespace Code.Infrastructure.Services.Reward
 
         public void Initialize()
         {
-            var enemiesConfig = _configService.Enemies;
-
-            _rewards[EnemyType.Asteroid] = enemiesConfig.Asteroid.Reward.RewardToDestructionValue;
-            _rewards[EnemyType.AsteroidDebris] = enemiesConfig.AsteroidDebris.Reward.RewardToDestructionValue;
-            _rewards[EnemyType.AlienShip] = enemiesConfig.AlienShip.Reward.RewardToDestructionValue;
+            foreach (var rewardConfig in _configService.Rewards.EnemyKillRewards)
+                _rewards[rewardConfig.EnemyType] = rewardConfig.Reward;
         }
 
         public void GiveReward(EnemyType type)

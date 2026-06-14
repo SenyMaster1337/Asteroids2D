@@ -9,7 +9,7 @@ namespace Code.Core.Configs.Enemies
         public AsteroidConfig Asteroid;
         public AsteroidDebrisConfig AsteroidDebris;
         public AlienShipConfig AlienShip;
-        
+
         public void Validate()
         {
             Asteroid.Validate();

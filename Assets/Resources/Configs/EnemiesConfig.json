@@ -8,9 +8,6 @@
     "Physics": {
       "Mass": 1,
       "KnockbackForce": 2
-    },
-    "Reward": {
-      "RewardToDestructionValue": 100
     }
   },
   "AsteroidDebris": {
@@ -21,9 +18,6 @@
     "Physics": {
       "Mass": 1,
       "KnockbackForce": 2
-    },
-    "Reward": {
-      "RewardToDestructionValue": 50
     }
   },
   "AlienShip": {
@@ -34,9 +28,6 @@
     "Physics": {
       "Mass": 1,
       "KnockbackForce": 5
-    },
-    "Reward": {
-      "RewardToDestructionValue": 200
     }
   }
 }
