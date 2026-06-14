@@ -18,8 +18,19 @@ namespace Code.Gameplay.Enemies.AlienShips
 
         public override void Launch()
             => _alienShipFollower.Launch();
+        
+        public override void Die()
+        {
+            if (TryMarkDead() == false) 
+                return;
 
-        public override void ResetVelocity()
-            => _body2D.SetVelocity(Vector2.zero);
+            base.Die();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _body2D.SetVelocity(Vector2.zero);
+        }
     }
 }

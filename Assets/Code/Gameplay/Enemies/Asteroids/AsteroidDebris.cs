@@ -14,8 +14,19 @@ namespace Code.Gameplay.Enemies.Asteroids
 
         public override void Launch()
             => _asteroidMover.Launch(true);
+        
+        public override void Die()
+        {
+            if (TryMarkDead() == false) 
+                return;
 
-        public override void ResetVelocity()
-            => _asteroidMover.ResetVelocity();
+            base.Die();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _asteroidMover.ResetVelocity();
+        }
     }
 }

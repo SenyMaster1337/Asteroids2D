@@ -26,7 +26,6 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
         private readonly IGameAreaProvider _gameAreaProvider;
         private readonly IConfigService _configService;
         private readonly Dictionary<EnemyType, ObjectPool<BaseEnemy>> _pools = new();
-        private readonly HashSet<BaseEnemy> _notActiveEnemies = new();
 
         private GameArea _area;
         private int _activeCount;
@@ -62,36 +61,21 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
             enemy.gameObject.transform.position = position ?? GetRandomEdgePosition();
             enemy.Launch();
             enemy.Dead += OnEnemyDeath;
-            enemy.Expired += OnEnemyExpired;
+            enemy.Expired += ReturnToPool;
             _activeCount++;
         }
 
         private void OnEnemyDeath(BaseEnemy enemy)
         {
-            if (IsEnemyInactive(enemy))
-                return;
-
             EnemyDied?.Invoke(enemy);
             ReturnToPool(enemy);
         }
 
-        private void OnEnemyExpired(BaseEnemy enemy)
-        {
-            if (IsEnemyInactive(enemy))
-                return;
-
-            ReturnToPool(enemy);
-        }
-
-        private bool IsEnemyInactive(BaseEnemy enemy)
-            => _notActiveEnemies.Add(enemy) == false;
-
         private void ReturnToPool(BaseEnemy enemy)
         {
-            _notActiveEnemies.Remove(enemy);
             enemy.Dead -= OnEnemyDeath;
-            enemy.Expired -= OnEnemyExpired;
-            enemy.ResetVelocity();
+            enemy.Expired -= ReturnToPool;
+            enemy.Reset();
             enemy.gameObject.SetActive(false);
             _pools[enemy.Type].Return(enemy);
             _activeCount--;
@@ -99,10 +83,10 @@ namespace Code.Infrastructure.Services.Spawners.Enemies
 
         private Vector2 GetRandomEdgePosition()
         {
-            _area = _gameAreaProvider.GameArea;
-            int edge = Random.Range(0, 4);
+            if (_area == null)
+                _area = _gameAreaProvider.GameArea;
 
-            return edge switch
+            return Random.Range(0, 4) switch
             {
                 0 => new Vector2(Random.Range(_area.MinX, _area.MaxX), _area.MaxY + SpawnOffset),
                 1 => new Vector2(Random.Range(_area.MinX, _area.MaxX), _area.MinY - SpawnOffset),

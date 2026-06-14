@@ -33,14 +33,20 @@ namespace Code.Gameplay.Enemies.Asteroids
 
         public override void Die()
         {
+            if (TryMarkDead() == false) 
+                return;
+
             for (int i = 0; i < _asteroidDebrisCount; i++)
                 SpawnDebrisAtRandomAngle();
-            
+
             base.Die();
         }
 
-        public override void ResetVelocity()
-            => _asteroidMover.ResetVelocity();
+        public override void Reset()
+        {
+            base.Reset();
+            _asteroidMover.ResetVelocity();
+        }
 
         private void SpawnDebrisAtRandomAngle()
         {

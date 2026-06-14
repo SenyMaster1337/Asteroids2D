@@ -11,23 +11,34 @@ namespace Code.Core.BaseEnemies
         public event Action<BaseEnemy> Dead;
         public event Action<BaseEnemy> Expired;
 
+        private bool _isDead;
+
         private void Awake()
             => OnAwake();
 
-        protected virtual void OnAwake()
-        {
-        }
+        protected virtual void OnAwake() { }
 
         public void InitType(EnemyType type)
             => Type = type;
 
         public abstract void Launch();
-        public abstract void ResetVelocity();
 
-        public virtual void Die()
+        public virtual void Die() 
             => Dead?.Invoke(this);
 
         public void InvokeExpired()
             => Expired?.Invoke(this);
+
+        public virtual void Reset()
+            => _isDead = false;
+
+        protected bool TryMarkDead()
+        {
+            if (_isDead)
+                return false;
+
+            _isDead = true;
+            return true;
+        }
     }
 }
