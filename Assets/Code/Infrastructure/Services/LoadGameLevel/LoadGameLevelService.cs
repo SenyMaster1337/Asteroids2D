@@ -2,6 +2,7 @@ using System;
 using Code.Core.Signals;
 using Code.Infrastructure.SceneNameConstants;
 using Code.Infrastructure.States;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace Code.Infrastructure.Services.LoadGameLevel
@@ -29,7 +30,7 @@ namespace Code.Infrastructure.Services.LoadGameLevel
             _signalBus.Unsubscribe<StartGameSignal>(OnGameRestarted);
         }
 
-        private async void OnGameRestarted() 
-            => await _gameStateMachine.Enter<LoadLevelState, string>(SceneNames.Main);
+        private void OnGameRestarted()
+            => _gameStateMachine.Enter<LoadLevelState, string>(SceneNames.Main).Forget();
     }
 }
