@@ -10,18 +10,6 @@ namespace Code.Infrastructure.Services.EnemyWave
 {
     public class EnemyWaveService : IEnemyWaveService, ITickable, IInitializable, ILevelReset
     {
-        private class WaveEntry
-        {
-            public float Interval { get; private set; }
-            public float Timer;
-
-            public WaveEntry(float interval)
-            {
-                Interval = interval;
-                Timer = interval;
-            }
-        }
-
         private readonly IEnemySpawnerService _enemySpawner;
         private readonly IConfigService _configService;
 
@@ -37,13 +25,10 @@ namespace Code.Infrastructure.Services.EnemyWave
 
         public void Initialize()
         {
-            var spawnConfig = _configService.EnemySpawn;
+            _enemyWaves = new Dictionary<EnemyType, WaveEntry>();
 
-            _enemyWaves = new Dictionary<EnemyType, WaveEntry>
-            {
-                [EnemyType.Asteroid] = new(spawnConfig.AsteroidSpawnIntervalValue),
-                [EnemyType.AlienShip] = new(spawnConfig.AlienShipSpawnIntervalValue)
-            };
+            foreach (var wave in _configService.EnemySpawn.Waves)
+                _enemyWaves[wave.EnemyType] = new WaveEntry(wave.SpawnInterval);
         }
 
         public void Tick()

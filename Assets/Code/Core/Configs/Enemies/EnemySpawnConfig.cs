@@ -1,19 +1,19 @@
 using System;
+using System.Collections.Generic;
 
 namespace Code.Core.Configs.Enemies
 {
     public class EnemySpawnConfig : IConfigValidate
     {
-        public float AsteroidSpawnIntervalValue;
-        public float AlienShipSpawnIntervalValue;
+        public List<WaveEntryConfig> Waves;
 
         public void Validate()
         {
-            if (AsteroidSpawnIntervalValue < 0)
-                throw new Exception("AsteroidSpawnInterval must be >= 0");
+            if (Waves == null || Waves.Count == 0)
+                throw new Exception("Waves list must not be empty");
 
-            if (AlienShipSpawnIntervalValue < 0)
-                throw new Exception("AlienShipSpawnInterval must be >= 0");
+            foreach (var wave in Waves)
+                wave.Validate();
         }
     }
 }

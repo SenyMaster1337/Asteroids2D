@@ -1,4 +1,6 @@
 {
-  "AsteroidSpawnIntervalValue": 1.8,
-  "AlienShipSpawnIntervalValue": 10
+  "Waves": [
+    { "EnemyType": "Asteroid", "SpawnInterval": 1.8 },
+    { "EnemyType": "AlienShip", "SpawnInterval": 10 }
+  ]
 }
