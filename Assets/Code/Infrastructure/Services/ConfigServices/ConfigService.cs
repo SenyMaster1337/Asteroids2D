@@ -45,6 +45,7 @@ namespace Code.Infrastructure.Services.ConfigServices
             Enemies.Validate();
             Area.Validate();
             EnemySpawn.Validate();
+            Rewards.Validate();
         }
     }
 }
