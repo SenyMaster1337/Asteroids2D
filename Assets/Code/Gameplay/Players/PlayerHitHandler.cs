@@ -81,6 +81,11 @@ namespace Code.Gameplay.Players
             }
             catch (OperationCanceledException)
             {
+                Debug.LogWarning("PlayerHitHandler: hit processing was cancelled.");
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError($"PlayerHitHandler: unexpected error during hit processing: {exception.Message}");
             }
             finally
             {
