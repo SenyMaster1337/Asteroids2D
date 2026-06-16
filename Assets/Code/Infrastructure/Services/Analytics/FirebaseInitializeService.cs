@@ -27,10 +27,12 @@ namespace Code.Infrastructure.Services.Analytics
             catch (OperationCanceledException)
             {
                 Debug.LogWarning("Firebase initialization was canceled.");
+                throw;
             }
             catch (Exception exception)
             {
                 Debug.LogError($"Firebase initialization failed: {exception.Message}");
+                throw;
             }
         }
 

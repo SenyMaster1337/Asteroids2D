@@ -1,7 +1,9 @@
+using System;
 using Code.Infrastructure.SceneLoaders;
 using Code.Infrastructure.SceneNameConstants;
 using Code.Infrastructure.Services.Analytics;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.States
@@ -25,7 +27,15 @@ namespace Code.Infrastructure.States
             if (SceneManager.GetActiveScene().name != SceneNames.Initial)
                 await _sceneLoader.LoadScene(SceneNames.Initial);
 
-            await _firebaseInitializeService.InitializeAsync();
+            try
+            {
+                await _firebaseInitializeService.InitializeAsync();
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError($"Critical: Firebase failed to initialize. {exception.Message}");
+            }
+
             await _gameStateMachine.Enter<LoadMainMenuState, string>(SceneNames.Menu);
         }
 
